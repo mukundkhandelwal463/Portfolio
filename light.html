@@ -1,0 +1,2804 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mukund Khandelwal | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Space Grotesk', 'sans-serif'], mono: ['Space Mono', 'monospace'] },
+                    colors: { primary: '#16a34a', secondary: '#111111', accent: '#15803d', dark: '#ffffff', card: '#f8fafc' }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html {
+            scroll-behavior: auto;
+            /* Lenis handles smooth scroll — do NOT use CSS smooth here */
+        }
+
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+
+        .lenis.lenis-stopped {
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+            transition: background .4s, color .4s
+        }
+
+        .dark body,
+        .dark {
+            background: #050505;
+            color: #e2e8f0
+        }
+
+        html:not(.dark) body {
+            background: #ffffff;
+            color: #0f0c29
+        }
+
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #050505;
+            transition: opacity .6s
+        }
+
+        .loader-ring {
+            width: 80px;
+            height: 80px;
+            border: 3px solid rgba(22, 163, 74, .2);
+            border-top-color: #16a34a;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px
+        }
+
+        .loader-ring2 {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(17, 17, 17, .2);
+            border-bottom-color: #111111;
+            border-radius: 50%;
+            animation: spin 1.5s linear infinite reverse
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        .loader-initials {
+            position: absolute;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+            font-family: 'Space Mono', monospace
+        }
+
+        .loader-bar {
+            width: 200px;
+            height: 2px;
+            background: rgba(255, 255, 255, .1);
+            border-radius: 99px;
+            overflow: hidden;
+            margin-top: 24px
+        }
+
+        .loader-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #16a34a, #111111);
+            width: 0%;
+            border-radius: 99px;
+            transition: width .1s
+        }
+
+        .loader-pct {
+            font-size: .75rem;
+            color: #16a34a;
+            font-family: monospace;
+            margin-top: 8px;
+            letter-spacing: 2px
+        }
+
+
+
+        /* Glass */
+        .glass {
+            background: rgba(255, 255, 255, .03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, .07);
+            border-radius: 16px
+        }
+
+        html:not(.dark) .glass {
+            background: rgba(255, 255, 255, .7);
+            border-color: rgba(22, 163, 74, .15);
+            box-shadow: 0 4px 24px rgba(22, 163, 74, .08)
+        }
+
+        /* Gradient text */
+        .grad {
+            background: linear-gradient(135deg, #0a7531, #111111);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text
+        }
+
+        .grad2 {
+            background: linear-gradient(135deg, #0a7531, #0a7531);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text
+        }
+
+        /* Blob */
+        .blob {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: .25;
+            pointer-events: none;
+            z-index: 0;
+            animation: blobFloat 12s ease-in-out infinite alternate
+        }
+
+        @keyframes blobFloat {
+            0% {
+                transform: translate(0, 0) scale(1)
+            }
+
+            100% {
+                transform: translate(40px, -60px) scale(1.15)
+            }
+        }
+
+        /* Nav */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
+            border-radius: 9999px;
+            z-index: 100;
+            padding: 16px 32px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            background: rgba(5, 5, 5, 0.0);
+            border: 1px solid transparent;
+        }
+
+        nav.scrolled {
+            background: rgba(5, 5, 5, .80);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(22, 163, 74, .2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            padding: 12px 32px;
+        }
+
+        html:not(.dark) nav.scrolled {
+            background: rgba(255, 255, 255, .9);
+            border-bottom-color: rgba(22, 163, 74, .15)
+        }
+
+        @keyframes robotFloat {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(-18px)
+            }
+        }
+
+        .robot-wrap {
+            position: relative;
+            animation: robotFloat 4s ease-in-out infinite
+        }
+
+        .robot-glow {
+            position: absolute;
+            inset: -20px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(22, 163, 74, .35) 0%, transparent 70%);
+            animation: glowPulse 3s ease-in-out infinite
+        }
+
+        @keyframes glowPulse {
+
+            0%,
+            100% {
+                opacity: .5;
+                transform: scale(1)
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.1)
+            }
+        }
+
+        .robot-orbit {
+            position: absolute;
+            border: 1px dashed rgba(22, 163, 74, .3);
+            border-radius: 50%;
+            animation: orbitSpin 8s linear infinite
+        }
+
+        .orbit-dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #16a34a, #111111);
+            top: -4px;
+            left: 50%;
+            transform: translateX(-50%)
+        }
+
+        @keyframes orbitSpin {
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+
+        /* GSAP handles all reveal animation — no CSS hiding */
+        .reveal.visible {
+            opacity: 1;
+            transform: none
+        }
+
+
+        /* Skill bars */
+        .skill-bar {
+            height: 4px;
+            border-radius: 99px;
+            background: rgba(22, 163, 74, .15);
+            overflow: hidden
+        }
+
+        .skill-fill {
+            height: 100%;
+            border-radius: 99px;
+            background: linear-gradient(90deg, #16a34a, #111111);
+            width: 0%;
+            transition: width 1.2s cubic-bezier(.23, 1, .32, 1)
+        }
+
+        /* Project card */
+        .proj-card {
+            transition: transform .4s cubic-bezier(.23, 1, .32, 1), box-shadow .4s;
+            cursor: default
+        }
+
+        .proj-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(22, 163, 74, .25)
+        }
+
+        /* Cert card */
+        .cert-card {
+            transition: transform .3s, box-shadow .3s
+        }
+
+        .cert-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(22, 163, 74, .2)
+        }
+
+        /* Timeline dot */
+        .tl-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #16a34a, #111111);
+            flex-shrink: 0;
+            margin-top: 6px;
+            box-shadow: 0 0 0 4px rgba(22, 163, 74, .15)
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 99px;
+            font-size: .7rem;
+            font-weight: 600;
+            background: rgba(22, 163, 74, .15);
+            color: #0a7531;
+            border: 1px solid rgba(22, 163, 74, .3)
+        }
+
+        html:not(.dark) .badge {
+            background: rgba(22, 163, 74, .1);
+            color: #5753d4
+        }
+
+        /* Scroll indicator */
+        .scroll-dot {
+            width: 4px;
+            height: 8px;
+            background: #0a7531;
+            border-radius: 99px;
+            animation: scrollBounce 1.5s ease-in-out infinite
+        }
+
+        @keyframes scrollBounce {
+
+            0%,
+            100% {
+                transform: translateY(0)
+            }
+
+            50% {
+                transform: translateY(6px)
+            }
+        }
+
+        /* Blinking cursor */
+        .cursor::after {
+            content: '|';
+            animation: blink .7s infinite;
+            color: #0a7531
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: 0
+            }
+        }
+
+        /* ===== LIGHT MODE: Crisp AI/ML Theme ===== */
+        html:not(.dark) body {
+            background: #ffffff;
+            color: #0f0c29
+        }
+
+        html:not(.dark) .glass {
+            background: rgba(255, 255, 255, .9);
+            border: 1px solid rgba(22, 163, 74, .18);
+            box-shadow: 0 4px 32px rgba(22, 163, 74, .1)
+        }
+
+        html:not(.dark) .blob {
+            opacity: .12
+        }
+
+        html:not(.dark) .grid-bg {
+            opacity: .7
+        }
+
+        html:not(.dark) .text-slate-600 {
+            color: #4a4680
+        }
+
+        html:not(.dark) .text-slate-700 {
+            color: #3d3a72
+        }
+
+        html:not(.dark) .text-slate-500 {
+            color: #6b68a8
+        }
+
+        html:not(.dark) .badge {
+            background: #ffffff;
+            color: #b39305;
+            border-color: #16a34a;
+        }
+
+        html:not(.dark) nav.scrolled {
+            background: rgba(255, 255, 255, .90);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(22, 163, 74, .18);
+            box-shadow: 0 10px 40px rgba(22, 163, 74, 0.1);
+        }
+
+        html:not(.dark) .proj-card:hover {
+            box-shadow: 0 20px 60px rgba(22, 163, 74, .18)
+        }
+
+        html:not(.dark) .cert-card:hover {
+            box-shadow: 0 12px 40px rgba(22, 163, 74, .16)
+        }
+
+        html:not(.dark) .skill-bar {
+            background: rgba(22, 163, 74, .12)
+        }
+
+        html:not(.dark) footer {
+            border-color: rgba(22, 163, 74, .12)
+        }
+
+        html:not(.dark) #navbar a.hover\:text-gray-900 {
+            color: #4a4680
+        }
+
+        html:not(.dark) #navbar a.hover\:text-gray-900:hover {
+            color: #16a34a
+        }
+
+        /* Neural dot overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(circle, rgba(22, 163, 74, .1) 1px, transparent 1px);
+            background-size: 32px 32px;
+            z-index: 0;
+            pointer-events: none
+        }
+
+        html:not(.dark) body::before {
+            background-image: radial-gradient(circle, rgba(22, 163, 74, .15) 1px, transparent 1px)
+        }
+
+        /* Marquee */
+        .marquee-wrap {
+            overflow: hidden;
+            white-space: nowrap;
+            border-top: 1px solid rgba(22, 163, 74, .12);
+            border-bottom: 1px solid rgba(22, 163, 74, .12);
+            padding: 12px 0;
+            position: relative;
+            z-index: 10
+        }
+
+        .marquee-track {
+            display: inline-block;
+            animation: marquee 22s linear infinite
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0)
+            }
+
+            100% {
+                transform: translateX(-50%)
+            }
+        }
+
+        .marquee-track span {
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: rgba(22, 163, 74, .5);
+            margin-right: 40px
+        }
+
+        .marquee-track span i {
+            color: #16a34a;
+            margin-right: 6px
+        }
+
+        html:not(.dark) .marquee-track span {
+            color: rgba(22, 163, 74, .6)
+        }
+
+        /* Projects — giant marquee style */
+        #projects {
+            overflow: hidden;
+        }
+
+        .proj-marquee-inner {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            will-change: transform;
+            padding: 0 6vw;
+            gap: 4vw;
+        }
+
+        .proj-bigname {
+            font-size: clamp(80px, 16vw, 200px);
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: -0.04em;
+            color: #fff;
+            font-family: 'Space Grotesk', sans-serif;
+            text-transform: uppercase;
+            flex-shrink: 0;
+        }
+
+        html:not(.dark) .proj-bigname {
+            color: #0f0c29;
+        }
+
+        .proj-bigname.accent {
+            -webkit-text-stroke: 2px rgba(22, 163, 74, .5);
+            color: transparent;
+        }
+
+        html:not(.dark) .proj-bigname.accent {
+            -webkit-text-stroke: 2px rgba(22, 163, 74, .6);
+        }
+
+        .proj-amp {
+            font-size: clamp(60px, 12vw, 160px);
+            font-weight: 900;
+            color: rgba(22, 163, 74, .25);
+            flex-shrink: 0;
+        }
+
+        .proj-float {
+            position: absolute;
+            pointer-events: none;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 24px 80px rgba(0, 0, 0, .5);
+            width: clamp(220px, 22vw, 340px);
+        }
+
+        .proj-float-inner {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            height: 100%;
+        }
+
+        .proj-float .pf-num {
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            opacity: .5;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .proj-float .pf-title {
+            font-size: 1.05rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .proj-float .pf-desc {
+            font-size: .75rem;
+            opacity: .7;
+            line-height: 1.5;
+        }
+        html:not(.dark) .proj-float {
+            box-shadow: 0 16px 40px rgba(22, 163, 74, 0.15);
+            border: 1px solid rgba(22, 163, 74, 0.3);
+        }
+
+
+        .proj-float .pf-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: auto;
+        }
+
+        .proj-float .pf-tag {
+            font-size: .62rem;
+            font-weight: 600;
+            letter-spacing: .06em;
+            padding: 3px 9px;
+            border-radius: 99px;
+            background: rgba(255, 255, 255, .12);
+            border: 1px solid rgba(255, 255, 255, .15);
+        }
+
+        /* Certification Flip Cards */
+        .cert-card-container {
+            perspective: 1000px;
+        }
+
+        .cert-card-inner {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        .cert-card-container:hover .cert-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .cert-front,
+        .cert-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, .03);
+            border: 1px solid rgba(22, 163, 74, .15);
+        }
+
+        .cert-back {
+            transform: rotateY(180deg);
+            background: rgba(22, 163, 74, .05);
+            border-color: rgba(22, 163, 74, .4);
+            cursor: pointer;
+            text-decoration: none;
+            transition: border-color 0.3s, background 0.3s;
+        }
+
+        .cert-back:hover {
+            border-color: rgba(17, 17, 17, .6);
+            background: rgba(17, 17, 17, .05);
+        }
+
+        /* Cert alternating left-right */
+        .cert-alt-card {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            padding: 28px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, .03);
+            border: 1px solid rgba(22, 163, 74, .15);
+            margin-bottom: 24px;
+            transition: transform .3s, border-color .3s;
+        }
+
+        html:not(.dark) .cert-alt-card {
+            background: rgba(255, 255, 255, .88);
+            border-color: rgba(22, 163, 74, .18);
+            box-shadow: 0 4px 20px rgba(22, 163, 74, .08);
+        }
+
+
+
+        .cert-alt-icon {
+            font-size: 2.8rem;
+            flex-shrink: 0;
+        }
+
+        .cert-alt-body h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .cert-alt-body p {
+            font-size: .8rem;
+            color: #94a3b8;
+            margin-bottom: 8px;
+        }
+
+        html:not(.dark) .cert-alt-body p {
+            color: #5a568a;
+        }
+
+        /* Horizontal scroll certs */
+        .cert-h-track {
+            display: flex;
+            gap: 28px;
+            width: max-content;
+            will-change: transform;
+            padding: 0 40px;
+        }
+
+        .cert-h-card {
+            flex-shrink: 0;
+            width: 300px;
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid rgba(22, 163, 74, .2);
+            border-radius: 20px;
+            padding: 32px 28px;
+            transition: border-color .3s, transform .3s;
+        }
+
+        html:not(.dark) .cert-h-card {
+            background: rgba(255, 255, 255, .9);
+            border-color: rgba(22, 163, 74, .18);
+            box-shadow: 0 4px 24px rgba(22, 163, 74, .08);
+        }
+
+        .cert-h-card:hover {
+            border-color: rgba(22, 163, 74, .5);
+            transform: translateY(-6px);
+        }
+
+        .cert-h-card .cert-icon,
+        .cert-alt-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .cert-h-card h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .cert-h-card p {
+            font-size: .78rem;
+            color: #6b68a8;
+            margin-bottom: 12px;
+        }
+
+        .dark .cert-h-card p {
+            color: #94a3b8;
+        }
+
+        .cert-scroll-label {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: .7rem;
+            font-weight: 600;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: rgba(22, 163, 74, .6);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .cert-scroll-arrow {
+            width: 40px;
+            height: 1px;
+            background: rgba(22, 163, 74, .4);
+            position: relative;
+        }
+
+        .cert-scroll-arrow::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: -3px;
+            border-top: 3px solid transparent;
+            border-bottom: 3px solid transparent;
+            border-left: 5px solid rgba(22, 163, 74, .6);
+        }
+
+        /* Glow divider */
+        .glow-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #16a34a 40%, #111111 60%, transparent);
+            margin: 0;
+            transform-origin: left;
+            opacity: .5
+        }
+
+        /* Custom cursor */
+        * {
+            cursor: none !important
+        }
+
+        #cursor-dot {
+            width: 10px;
+            height: 10px;
+            background: #16a34a;
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 99999;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 12px rgba(22, 163, 74, .8);
+            transition: background .2s, box-shadow .2s
+        }
+
+        #cursor-ring {
+            width: 36px;
+            height: 36px;
+            border: 1.5px solid rgba(22, 163, 74, .5);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 99998;
+            transform: translate(-50%, -50%)
+        }
+    
+        .proj-bigname.accent {
+            -webkit-text-stroke: 2px rgba(22, 163, 74, .5);
+            color: transparent;
+        }
+
+        html:not(.dark) .proj-bigname.accent {
+            -webkit-text-stroke: 2px rgba(22, 163, 74, .6);
+        }
+
+        .proj-amp {
+            font-size: clamp(60px, 12vw, 160px);
+            font-weight: 900;
+            color: rgba(22, 163, 74, .25);
+            flex-shrink: 0;
+        }
+
+        .proj-float {
+            position: absolute;
+            pointer-events: none;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 24px 80px rgba(0, 0, 0, .5);
+            width: clamp(220px, 22vw, 340px);
+        }
+
+        .proj-float-inner {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            height: 100%;
+        }
+
+        .proj-float .pf-num {
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            opacity: .5;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .proj-float .pf-title {
+            font-size: 1.05rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .proj-float .pf-desc {
+            font-size: .75rem;
+            opacity: .7;
+            line-height: 1.5;
+        }
+        html:not(.dark) .proj-float {
+            box-shadow: 0 16px 40px rgba(22, 163, 74, 0.15);
+            border: 1px solid rgba(22, 163, 74, 0.3);
+        }
+
+
+        .proj-float .pf-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: auto;
+        }
+
+        .proj-float .pf-tag {
+            font-size: .62rem;
+            font-weight: 600;
+            letter-spacing: .06em;
+            padding: 3px 9px;
+            border-radius: 99px;
+            background: rgba(255, 255, 255, .12);
+            border: 1px solid rgba(255, 255, 255, .15);
+        }
+
+        /* Certification Flip Cards */
+        .cert-card-container {
+            perspective: 1000px;
+        }
+
+        .cert-card-inner {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        .cert-card-container:hover .cert-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .cert-front,
+        .cert-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, .03);
+            border: 1px solid rgba(22, 163, 74, .15);
+        }
+
+        .cert-back {
+            transform: rotateY(180deg);
+            background: rgba(22, 163, 74, .05);
+            border-color: rgba(22, 163, 74, .4);
+            cursor: pointer;
+            text-decoration: none;
+            transition: border-color 0.3s, background 0.3s;
+        }
+
+        .cert-back:hover {
+            border-color: rgba(17, 17, 17, .6);
+            background: rgba(17, 17, 17, .05);
+        }
+
+        /* Cert alternating left-right */
+        .cert-alt-card {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            padding: 28px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, .03);
+            border: 1px solid rgba(22, 163, 74, .15);
+            margin-bottom: 24px;
+            transition: transform .3s, border-color .3s;
+        }
+
+        html:not(.dark) .cert-alt-card {
+            background: rgba(255, 255, 255, .88);
+            border-color: rgba(22, 163, 74, .18);
+            box-shadow: 0 4px 20px rgba(22, 163, 74, .08);
+        }
+
+
+
+        .cert-alt-icon {
+            font-size: 2.8rem;
+            flex-shrink: 0;
+        }
+
+        .cert-alt-body h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .cert-alt-body p {
+            font-size: .8rem;
+            color: #94a3b8;
+            margin-bottom: 8px;
+        }
+
+        html:not(.dark) .cert-alt-body p {
+            color: #5a568a;
+        }
+
+        /* Horizontal scroll certs */
+        .cert-h-track {
+            display: flex;
+            gap: 28px;
+            width: max-content;
+            will-change: transform;
+            padding: 0 40px;
+        }
+
+        .cert-h-card {
+            flex-shrink: 0;
+            width: 300px;
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid rgba(22, 163, 74, .2);
+            border-radius: 20px;
+            padding: 32px 28px;
+            transition: border-color .3s, transform .3s;
+        }
+
+        html:not(.dark) .cert-h-card {
+            background: rgba(255, 255, 255, .9);
+            border-color: rgba(22, 163, 74, .18);
+            box-shadow: 0 4px 24px rgba(22, 163, 74, .08);
+        }
+
+        .cert-h-card:hover {
+            border-color: rgba(22, 163, 74, .5);
+            transform: translateY(-6px);
+        }
+
+        .cert-h-card .cert-icon,
+        .cert-alt-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .cert-h-card h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .cert-h-card p {
+            font-size: .78rem;
+            color: #6b68a8;
+            margin-bottom: 12px;
+        }
+
+        .dark .cert-h-card p {
+            color: #94a3b8;
+        }
+
+        .cert-scroll-label {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: .7rem;
+            font-weight: 600;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: rgba(22, 163, 74, .6);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .cert-scroll-arrow {
+            width: 40px;
+            height: 1px;
+            background: rgba(22, 163, 74, .4);
+            position: relative;
+        }
+
+        .cert-scroll-arrow::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: -3px;
+            border-top: 3px solid transparent;
+            border-bottom: 3px solid transparent;
+            border-left: 5px solid rgba(22, 163, 74, .6);
+        }
+
+        /* Glow divider */
+        .glow-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #16a34a 40%, #111111 60%, transparent);
+            margin: 0;
+            transform-origin: left;
+            opacity: .5
+        }
+
+        /* Custom cursor */
+        * {
+            cursor: none !important
+        }
+
+        #cursor-dot {
+            width: 10px;
+            height: 10px;
+            background: #16a34a;
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 99999;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 12px rgba(22, 163, 74, .8);
+            transition: background .2s, box-shadow .2s
+        }
+
+        #cursor-ring {
+            width: 36px;
+            height: 36px;
+            border: 1.5px solid rgba(22, 163, 74, .5);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 99998;
+            transform: translate(-50%, -50%)
+        }
+    
+        /* Light mode - use dark green shade for all content text */
+        html:not(.dark) body {
+            color: #0f0c29;
+        }
+        html:not(.dark) h1,
+        html:not(.dark) h2,
+        html:not(.dark) h3,
+        html:not(.dark) h4,
+        html:not(.dark) h5,
+        html:not(.dark) p,
+        html:not(.dark) li,
+        html:not(.dark) span:not(.grad):not(.grad2):not(.text-primary):not(.text-secondary):not(.text-accent):not(.badge) {
+            color: #0f0c29;
+        }
+        html:not(.dark) .text-gray-900 {
+            color: #0f0c29 !important;
+        }
+        html:not(.dark) .text-slate-600 {
+            color: #0f0c29 !important;
+        }
+        html:not(.dark) .text-slate-700 {
+            color: #14532d !important;
+        }
+        html:not(.dark) .text-slate-500 {
+            color: #15803d !important;
+        }
+        html:not(.dark) .text-slate-400 {
+            color: #16a34a !important;
+        }
+        html:not(.dark) .proj-bigname {
+            color: #0f0c29;
+        }
+
+        </style>
+
+    <style>
+        .lang-title {
+            font-family: 'Oswald', sans-serif;
+            cursor: default;
+        }
+
+        .lang-title span {
+            transition: font-weight 0.4s ease, opacity 0.4s ease;
+            font-weight: 500;
+        }
+
+        .lang-title:hover .edge-letter {
+            font-weight: 200;
+            opacity: 0.6;
+        }
+
+        .lang-title:hover .core-letter {
+            font-weight: 700;
+            opacity: 1;
+            text-shadow: 0 0 10px rgba(22, 163, 74, 0.4);
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Custom Cursor -->
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div style="position:relative;display:flex;align-items:center;justify-content:center">
+            <div class="loader-ring"></div>
+            <div class="loader-ring2"></div>
+            <div class="loader-initials">MK</div>
+        </div>
+        <div class="loader-bar">
+            <div class="loader-fill" id="lf"></div>
+        </div>
+        <div class="loader-pct" id="lpct">0%</div>
+    </div>
+
+    <!-- Background -->
+
+    <div class="blob w-[600px] h-[600px] bg-primary" style="top:-200px;left:-200px;animation-delay:0s"></div>
+    <div class="blob w-[500px] h-[500px] bg-secondary" style="bottom:-150px;right:-150px;animation-delay:-6s"></div>
+
+    <!-- Navbar -->
+    <nav id="navbar">
+        <div class="max-w-6xl mx-auto flex items-center justify-between w-full">
+            <a href="#" class="font-mono font-bold text-xl grad">MK<span class="text-primary">.</span></a>
+            <div class="hidden md:flex gap-8 text-sm font-medium text-slate-600">
+                <a href="#about" class="hover:text-gray-900 dark:hover:text-gray-900 transition-colors">About</a>
+                <a href="#skills" class="hover:text-gray-900 dark:hover:text-gray-900 transition-colors">Skills</a>
+                <a href="#projects" class="hover:text-gray-900 dark:hover:text-gray-900 transition-colors">Projects</a>
+                <a href="#education"
+                    class="hover:text-gray-900 dark:hover:text-gray-900 transition-colors">Education</a>
+                <a href="#contact" class="hover:text-gray-900 dark:hover:text-gray-900 transition-colors">Contact</a>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="mukund cv.pdf" download="Mukund_Khandelwal_CV.pdf"
+                    class="hidden md:flex items-center gap-2 px-4 py-2 rounded-full glass border border-secondary/30 text-secondary text-sm font-semibold hover:bg-secondary/10 transition-colors">
+                    <i class="fas fa-file-pdf"></i> CV
+                </a>
+                <button id="themeBtn"
+                    class="w-9 h-9 rounded-full glass flex items-center justify-center text-sm text-slate-600 hover:text-primary transition-colors">
+                    <i class="fas fa-moon text-slate-800"></i>
+                </button>
+                <a href="mailto:mukundkhandelwal463@gmail.com"
+                    class="hidden md:block px-5 py-2 rounded-full bg-primary text-gray-900 text-sm font-semibold hover:bg-green-600 transition-colors">Hire
+                    Me</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="hero" class="relative z-10 min-h-screen flex items-center pt-20">
+        <div class="max-w-6xl mx-auto px-6 w-full">
+            <div class="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-0">
+
+                <!-- Left Text -->
+                <div class="flex-1 text-center lg:text-left">
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-xs font-mono text-secondary mb-6">
+                        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                        Available for new opportunities
+                    </div>
+                    <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-4">
+                        Hi, I'm<br><span class="grad cursor" id="typed-name">Mukund</span>
+                    </h1>
+                    <p class="text-xl md:text-2xl text-slate-600 mb-4 font-light">Data Scientist &amp; Python Backend
+                        Developer</p>
+                    <p class="text-slate-500 max-w-lg mb-8 leading-relaxed">Building intelligent, scalable systems with
+                        ML &amp; clean backend architecture.</p>
+                    <div class="flex flex-wrap gap-4 justify-center lg:justify-start mb-10">
+                        <a href="#projects"
+                            class="px-7 py-3 rounded-full bg-primary text-gray-900 font-semibold hover:bg-green-600 transition-all hover:scale-105 shadow-md shadow-gray-200/50">View
+                            Projects</a>
+                        <a href="mukund cv.pdf" download="Mukund_Khandelwal_CV.pdf"
+                            class="px-7 py-3 rounded-full glass border border-secondary/50 text-secondary font-semibold hover:bg-secondary/10 transition-all hover:scale-105 flex items-center gap-2">
+                            <i class="fas fa-download"></i> Download CV
+                        </a>
+                        <a href="#contact"
+                            class="px-7 py-3 rounded-full glass text-slate-700 font-semibold hover:border-primary/50 transition-all hover:scale-105">Contact
+                            Me</a>
+                    </div>
+                    <div class="flex gap-4 justify-center lg:justify-start">
+                        <a href="https://github.com/mukundkhandelwal463" target="_blank"
+                            class="w-11 h-11 rounded-full glass flex items-center justify-center text-slate-600 hover:text-gray-900 hover:border-primary/40 transition-all"><i
+                                class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/in/mukund-khandelwal-6a8663283" target="_blank"
+                            class="w-11 h-11 rounded-full glass flex items-center justify-center text-slate-600 hover:text-secondary hover:border-secondary/40 transition-all"><i
+                                class="fab fa-linkedin-in"></i></a>
+                        <a href="mailto:mukundkhandelwal463@gmail.com"
+                            class="w-11 h-11 rounded-full glass flex items-center justify-center text-slate-600 hover:text-accent hover:border-accent/40 transition-all"><i
+                                class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+
+                <!-- Right Robot -->
+                <div class="flex-1 flex flex-col items-center justify-center relative">
+                    <div class="robot-wrap">
+                        <div class="robot-glow"></div>
+                        <!-- Orbit ring 1 -->
+                        <div class="robot-orbit"
+                            style="width:320px;height:320px;top:50%;left:50%;transform:translate(-50%,-50%);animation-duration:8s">
+                            <div class="orbit-dot" style="background:linear-gradient(135deg,#16a34a,#111111)"></div>
+                        </div>
+                        <!-- Orbit ring 2 -->
+                        <div class="robot-orbit"
+                            style="width:240px;height:240px;top:50%;left:50%;transform:translate(-50%,-50%);animation-duration:5s;animation-direction:reverse;border-style:solid;border-color:rgba(17,17,17,.2)">
+                            <div class="orbit-dot" style="background:linear-gradient(135deg,#15803d,#16a34a)"></div>
+                        </div>
+
+                        <!-- ROBOT SVG -->
+                        <svg width="260" height="320" viewBox="0 0 260 320" fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            style="filter:drop-shadow(0 0 40px rgba(22,163,74,.5));position:relative;z-index:2">
+                            <!-- Antenna -->
+                            <line x1="130" y1="20" x2="130" y2="50" stroke="#16a34a" stroke-width="3"
+                                stroke-linecap="round" />
+                            <circle cx="130" cy="14" r="8" fill="#16a34a" />
+                            <circle cx="130" cy="14" r="4" fill="#111111" opacity="0.9">
+                                <animate attributeName="r" values="4;7;4" dur="2s" repeatCount="indefinite" />
+                                <animate attributeName="opacity" values="0.9;0.4;0.9" dur="2s"
+                                    repeatCount="indefinite" />
+                            </circle>
+                            <!-- Head -->
+                            <rect x="70" y="50" width="120" height="100" rx="24" fill="url(#headGrad)" />
+                            <rect x="70" y="50" width="120" height="100" rx="24" fill="none"
+                                stroke="rgba(22,163,74,0.4)" stroke-width="1.5" />
+                            <!-- Visor -->
+                            <rect x="82" y="65" width="96" height="70" rx="14" fill="#060612" />
+                            <rect x="82" y="65" width="96" height="70" rx="14" fill="none" stroke="rgba(17,17,17,0.3)"
+                                stroke-width="1" />
+                            <!-- Eyes -->
+                            <ellipse cx="108" cy="95" rx="16" ry="16" fill="rgba(17,17,17,0.15)" />
+                            <ellipse cx="108" cy="95" rx="10" ry="10" fill="#111111">
+                                <animate attributeName="ry" values="10;2;10;10" dur="4s" repeatCount="indefinite" />
+                            </ellipse>
+                            <ellipse cx="108" cy="95" rx="5" ry="5" fill="white" opacity="0.9" />
+                            <ellipse cx="152" cy="95" rx="16" ry="16" fill="rgba(17,17,17,0.15)" />
+                            <ellipse cx="152" cy="95" rx="10" ry="10" fill="#111111">
+                                <animate attributeName="ry" values="10;2;10;10" dur="4s" begin="0.1s"
+                                    repeatCount="indefinite" />
+                            </ellipse>
+                            <ellipse cx="152" cy="95" rx="5" ry="5" fill="white" opacity="0.9" />
+                            <!-- Smile -->
+                            <path d="M 105 118 Q 130 132 155 118" stroke="#111111" stroke-width="2.5" fill="none"
+                                stroke-linecap="round" />
+                            <!-- Neck -->
+                            <rect x="115" y="148" width="30" height="16" rx="6" fill="url(#bodyGrad)" />
+                            <!-- Body -->
+                            <rect x="55" y="162" width="150" height="110" rx="28" fill="url(#bodyGrad)" />
+                            <rect x="55" y="162" width="150" height="110" rx="28" fill="none"
+                                stroke="rgba(22,163,74,0.3)" stroke-width="1.5" />
+                            <!-- Chest panel -->
+                            <rect x="90" y="182" width="80" height="50" rx="10" fill="rgba(0,0,0,0.4)" />
+                            <!-- Heart/power indicator -->
+                            <circle cx="130" cy="200" r="8" fill="#16a34a" opacity="0.8">
+                                <animate attributeName="opacity" values="0.8;0.3;0.8" dur="1.2s"
+                                    repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="130" cy="200" r="4" fill="white" />
+                            <!-- Side buttons -->
+                            <circle cx="105" cy="220" r="5" fill="#111111" opacity="0.7" />
+                            <circle cx="155" cy="220" r="5" fill="#15803d" opacity="0.7" />
+                            <!-- Left Arm - waving -->
+                            <rect x="10" y="168" width="45" height="22" rx="11" fill="url(#bodyGrad)"
+                                transform="rotate(-35 10 168)" />
+                            <rect x="10" y="168" width="45" height="22" rx="11" fill="none" stroke="rgba(22,163,74,0.3)"
+                                stroke-width="1" transform="rotate(-35 10 168)" />
+                            <circle cx="22" cy="150" r="14" fill="url(#bodyGrad)" stroke="rgba(22,163,74,0.3)"
+                                stroke-width="1">
+                                <animateTransform attributeName="transform" type="rotate"
+                                    values="-5 22 150;-20 22 150;-5 22 150" dur="1.5s" repeatCount="indefinite" />
+                            </circle>
+                            <!-- Right Arm -->
+                            <rect x="205" y="168" width="45" height="22" rx="11" fill="url(#bodyGrad)"
+                                transform="rotate(20 205 168)" />
+                            <circle cx="238" cy="185" r="14" fill="url(#bodyGrad)" stroke="rgba(22,163,74,0.3)"
+                                stroke-width="1" />
+                            <!-- Legs -->
+                            <rect x="90" y="268" width="32" height="45" rx="12" fill="url(#bodyGrad)" />
+                            <rect x="138" y="268" width="32" height="45" rx="12" fill="url(#bodyGrad)" />
+                            <!-- Feet -->
+                            <rect x="83" y="305" width="46" height="18" rx="9" fill="url(#headGrad)" />
+                            <rect x="131" y="305" width="46" height="18" rx="9" fill="url(#headGrad)" />
+                            <!-- Gradient defs -->
+                            <defs>
+                                <linearGradient id="headGrad" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#2a2a4a" />
+                                    <stop offset="100%" stop-color="#1a1a35" />
+                                </linearGradient>
+                                <linearGradient id="bodyGrad" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#3a3a6a" />
+                                    <stop offset="100%" stop-color="#242450" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+
+                        <!-- Floating badges around robot -->
+                        <div class="absolute -right-8 top-16 badge text-xs shadow-lg animate-bounce"
+                            style="animation-delay:.5s">Python 🐍</div>
+                        <div class="absolute -left-12 top-24 badge text-xs shadow-lg animate-bounce"
+                            style="animation-delay:1s">ML 🤖</div>
+                        <div class="absolute right-0 bottom-16 badge text-xs shadow-lg animate-bounce"
+                            style="animation-delay:1.5s">Django ⚡</div>
+                        <div class="absolute -left-6 bottom-24 badge text-xs shadow-lg animate-bounce"
+                            style="animation-delay:2s">NLP 🧠</div>
+                    </div>
+
+                    <!-- Scroll indicator -->
+                    <div class="mt-16 flex flex-col items-center gap-2 text-slate-500 text-xs">
+                        <span>Scroll down</span>
+                        <div class="w-5 h-8 border border-slate-600 rounded-full flex items-center justify-center">
+                            <div class="scroll-dot"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="relative z-10 py-24 reveal">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex flex-col lg:flex-row gap-12 items-center">
+                <!-- Profile photo -->
+                <div class="flex-shrink-0 flex flex-col items-center gap-4">
+                    <div class="relative w-72 h-72 lg:w-80 lg:h-80 rounded-3xl overflow-hidden shadow-2xl transition-transform hover:scale-105 duration-500"
+                        style="border:2px solid rgba(22,163,74,.4);box-shadow:0 0 40px rgba(22,163,74,.3)">
+                        <img src="assets/profile.jpeg" alt="Mukund Khandelwal" class="w-full h-full object-cover">
+                        <div
+                            style="position:absolute;inset:0;background:linear-gradient(to top,rgba(22,163,74,.3),transparent)">
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <div class="font-bold text-xl md:text-2xl mt-4">Mukund Khandelwal</div>
+                        <div class="text-base text-slate-600">Data Scientist • Backend Dev</div>
+                        <div class="flex gap-2 mt-3 justify-center">
+                            <span class="w-3 h-3 rounded-full bg-green-400 animate-pulse mt-1"></span>
+                            <span class="text-sm text-green-400 font-semibold">Open to work</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Text -->
+                <div class="flex-1 lg:pl-8">
+
+                    <p class="text-slate-700 text-xl md:text-2xl leading-relaxed mb-6 font-light">Hi, I'm a passionate
+                        <strong class="text-primary">Data Scientist</strong> and <strong class="text-primary">Python
+                            Backend
+                            Developer</strong> driven by a love for innovation and building intelligent systems. I
+                        specialize in turning complex data into actionable insights and creating scalable backend
+                        architectures.
+                    </p>
+                    <p class="text-slate-600 text-lg md:text-xl leading-relaxed mb-8">My expertise lies in developing
+                        machine learning models, natural language processing pipelines, and bringing robust data-driven
+                        solutions to life through powerful REST APIs and optimized databases. I'm always eager to tackle
+                        new challenges that push the boundaries of technology!</p>
+                    <div class="grid grid-cols-2 gap-4 mt-8">
+                        <div class="glass p-4 rounded-xl text-center">
+                            <div class="text-2xl font-bold grad">4+</div>
+                            <div class="text-xs text-slate-500 mt-1">Major Projects</div>
+                        </div>
+                        <div class="glass p-4 rounded-xl text-center">
+                            <div class="text-2xl font-bold grad">6+</div>
+                            <div class="text-xs text-slate-500 mt-1">Certifications</div>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-3 mt-6">
+                        <div class="flex items-center gap-2 text-sm text-slate-600"><i
+                                class="fas fa-location-dot text-primary"></i> Dausa, Rajasthan, India</div>
+                        <div class="flex items-center gap-2 text-sm text-slate-600"><i
+                                class="fas fa-phone text-primary"></i> +91 63764 47286</div>
+                        <div class="flex items-center gap-2 text-sm text-slate-600"><i
+                                class="fas fa-envelope text-primary"></i> mukundkhandelwal463@gmail.com</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="relative z-10 py-24 reveal">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+
+                <h2
+                    class="text-4xl md:text-5xl uppercase tracking-widest flex flex-wrap justify-center mb-10 text-gray-900 lang-title">
+                    <span class="font-extralight opacity-80">S</span><span
+                        class="font-black tracking-tight">k</span><span class="font-black tracking-tight">i</span><span
+                        class="font-black tracking-tight">l</span><span class="font-extralight opacity-80">l</span><span
+                        class="font-extralight opacity-80">s</span>&nbsp;<span
+                        class="text-secondary/20">/</span>&nbsp;<span class="font-extralight opacity-80">T</span><span
+                        class="font-black tracking-tight">e</span><span class="font-black tracking-tight">c</span><span
+                        class="font-black tracking-tight">h</span><span class="font-black tracking-tight">n</span><span
+                        class="font-black tracking-tight">o</span><span class="font-black tracking-tight">l</span><span
+                        class="font-black tracking-tight">o</span><span class="font-black tracking-tight">g</span><span
+                        class="font-black tracking-tight">i</span><span class="font-extralight opacity-80">e</span><span
+                        class="font-extralight opacity-80">s</span>
+                </h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Card 1 -->
+                <div class="glass p-8 rounded-2xl reveal">
+                    <h3 class="font-bold text-lg mb-6 flex items-center gap-3"><span
+                            class="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center text-primary"><i
+                                class="fas fa-code text-sm"></i></span>Programming</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1"><span>Python</span><span
+                                    class="text-primary">90%</span></div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-w="90"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1"><span>JavaScript</span><span
+                                    class="text-primary">75%</span></div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-w="75"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1"><span>C++</span><span
+                                    class="text-primary">70%</span></div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-w="70"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1"><span>Java</span><span
+                                    class="text-primary">65%</span></div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-w="65"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mt-6">
+                        <span class="badge">Python</span><span class="badge">C++</span><span
+                            class="badge">Java</span><span class="badge">JavaScript</span>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="glass p-8 rounded-2xl reveal">
+                    <h3 class="font-bold text-lg mb-6 flex items-center gap-3"><span
+                            class="w-8 h-8 rounded-lg bg-secondary/20 flex items-center justify-center text-secondary"><i
+                                class="fas fa-brain text-sm"></i></span>ML &amp; Data Science</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1"><span>Pandas / NumPy</span><span
+                                    class="text-secondary">88%</span></div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-w="88"
+                                    style="background:linear-gradient(90deg,#111111,#16a34a)"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1"><span>Scikit-learn</span><span
+                                    class="text-secondary">82%</span></div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-w="82"
+                                    style="background:linear-gradient(90deg,#111111,#16a34a)"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1"><span>NLP / spaCy</span><span
+                                    class="text-secondary">78%</span></div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-w="78"
+                                    style="background:linear-gradient(90deg,#111111,#16a34a)"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1"><span>Matplotlib / Seaborn</span><span
+                                    class="text-secondary">80%</span></div>
+                            <div class="skill-bar">
+                                <div class="skill-fill" data-w="80"
+                                    style="background:linear-gradient(90deg,#111111,#16a34a)"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mt-6">
+                        <span class="badge">Pandas</span><span class="badge">NumPy</span><span
+                            class="badge">Scikit-learn</span><span class="badge">NLP</span><span
+                            class="badge">Seaborn</span>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="glass p-8 rounded-2xl reveal">
+                    <h3 class="font-bold text-lg mb-6 flex items-center gap-3"><span
+                            class="w-8 h-8 rounded-lg bg-accent/20 flex items-center justify-center text-accent"><i
+                                class="fas fa-globe text-sm"></i></span>Web &amp; Frameworks</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="badge">Django</span><span class="badge">Flask</span><span
+                            class="badge">HTML5</span><span class="badge">CSS3</span><span class="badge">REST
+                            APIs</span><span class="badge">Streamlit</span>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="glass p-8 rounded-2xl reveal">
+                    <h3 class="font-bold text-lg mb-6 flex items-center gap-3"><span
+                            class="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-400"><i
+                                class="fas fa-database text-sm"></i></span>Databases &amp; Tools</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="badge">MySQL</span><span class="badge">MongoDB</span><span
+                            class="badge">SQLite</span><span class="badge">Git</span><span class="badge">Power
+                            BI</span><span class="badge">Tableau</span><span class="badge">Excel</span><span
+                            class="badge">Render</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CERTIFICATIONS (alternating left-right scroll reveal) -->
+    <section id="certs" class="relative z-10 py-24">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-16">
+
+                <h2
+                    class="text-4xl md:text-5xl uppercase tracking-widest flex flex-wrap justify-center mb-10 text-gray-900 lang-title">
+                    <span class="font-extralight opacity-80">C</span><span
+                        class="font-black tracking-tight">e</span><span class="font-black tracking-tight">r</span><span
+                        class="font-black tracking-tight">t</span><span class="font-black tracking-tight">i</span><span
+                        class="font-black tracking-tight">f</span><span class="font-black tracking-tight">i</span><span
+                        class="font-black tracking-tight">c</span><span class="font-black tracking-tight">a</span><span
+                        class="font-black tracking-tight">t</span><span class="font-black tracking-tight">i</span><span
+                        class="font-black tracking-tight">o</span><span class="font-extralight opacity-80">n</span><span
+                        class="font-extralight opacity-80">s</span>
+                </h2>
+            </div>
+            <div id="cert-list" class="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center">
+                <!-- Cert 1 -->
+                <div class="cert-card-container cert-lr aspect-square w-full max-w-[320px]" data-dir="left">
+                    <div class="cert-card-inner">
+                        <div class="cert-front">
+                            <div class="cert-alt-icon text-5xl mb-2">🧠</div>
+                            <div class="cert-alt-body">
+                                <h4 class="text-xl mb-2">Machine Learning &amp; Data Science</h4>
+                                <p class="mb-4 text-slate-600">GeeksforGeeks</p><span
+                                    class="badge w-fit mx-auto">2026</span>
+                            </div>
+                        </div>
+                        <a href="https://media.geeksforgeeks.org/courses/certificates/5f44e29f1d4fc491aaa9eb12ca33fd24.pdf" target="_blank" class="cert-back group">
+                            <p class="text-sm text-slate-700 mb-6 leading-relaxed">Mastered core ML algorithms, data
+                                preprocessing, and predictive modeling using Python, Pandas, and Scikit-Learn.</p>
+                            <span
+                                class="text-primary group-hover:text-secondary transition-colors font-semibold flex items-center gap-2"><i
+                                    class="fas fa-link"></i> View Credential</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Cert 2 -->
+                <div class="cert-card-container cert-lr aspect-square w-full max-w-[320px]" data-dir="right">
+                    <div class="cert-card-inner">
+                        <div class="cert-front">
+                            <div class="cert-alt-icon text-5xl mb-2">☁️</div>
+                            <div class="cert-alt-body">
+                                <h4 class="text-xl mb-2">Cloud Computing</h4>
+                                <p class="mb-4 text-slate-600">NPTEL</p><span class="badge w-fit mx-auto">2025</span>
+                            </div>
+                        </div>
+                        <a href="https://archive.nptel.ac.in/content/noc/NOC25/SEM1/Ecertificates/106/noc25-cs11/Course/NPTEL25CS11S133730064004242426.pdf" target="_blank" class="cert-back group">
+                            <p class="text-sm text-slate-700 mb-6 leading-relaxed">Learned cloud architecture,
+                                deployment strategies, and integrating machine learning within scalable server
+                                environments.</p>
+                            <span
+                                class="text-primary group-hover:text-secondary transition-colors font-semibold flex items-center gap-2"><i
+                                    class="fas fa-link"></i> View Credential</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Cert 3 -->
+                <div class="cert-card-container cert-lr aspect-square w-full max-w-[320px]" data-dir="left">
+                    <div class="cert-card-inner">
+                        <div class="cert-front">
+                            <div class="cert-alt-icon text-5xl mb-2">🗄️</div>
+                            <div class="cert-alt-body">
+                                <h4 class="text-xl mb-2">Database Management System</h4>
+                                <p class="mb-4 text-slate-600">Infosys</p><span class="badge w-fit mx-auto">2025</span>
+                            </div>
+                        </div>
+                        <a href="https://verify.onwingspan.com" target="_blank" class="cert-back group">
+                            <img src="./assets/image copy.png" alt="Scan to Verify" class="w-28 h-28 mx-auto mb-3 rounded-lg border border-primary/20" />
+                            <p class="text-xs text-slate-500 mb-1">Issued: Saturday, June 14, 2025</p>
+                            <p class="text-xs text-slate-500 mb-4">Scan QR or click to verify</p>
+                            <span
+                                class="text-primary group-hover:text-secondary transition-colors font-semibold flex items-center gap-2"><i
+                                    class="fas fa-link"></i> View Credential</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Cert 4 -->
+                <div class="cert-card-container cert-lr aspect-square w-full max-w-[320px]" data-dir="right">
+                    <div class="cert-card-inner">
+                        <div class="cert-front">
+                            <div class="cert-alt-icon text-5xl mb-2">💻</div>
+                            <div class="cert-alt-body">
+                                <h4 class="text-xl mb-2">Responsive Web Design</h4>
+                                <p class="mb-4 text-slate-600">freeCodeCamp</p><span
+                                    class="badge w-fit mx-auto">2024</span>
+                            </div>
+                        </div>
+                        <a href="https://www.freecodecamp.org/certification/fcc68b1d3da-d878-41f9-858f-8ab767949785/responsive-web-design" target="_blank" class="cert-back group">
+                            <p class="text-sm text-slate-700 mb-6 leading-relaxed">Built responsive, custom CSS
+                                interfaces maintaining structural integrity across mobile and desktop breakpoints.</p>
+                            <span
+                                class="text-primary group-hover:text-secondary transition-colors font-semibold flex items-center gap-2"><i
+                                    class="fas fa-link"></i> View Credential</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Cert 5 -->
+                <div class="cert-card-container cert-lr aspect-square w-full max-w-[320px]" data-dir="left">
+                    <div class="cert-card-inner">
+                        <div class="cert-front">
+                            <div class="cert-alt-icon text-5xl mb-2">📈</div>
+                            <div class="cert-alt-body">
+                                <h4 class="text-xl mb-2">Data Visualization</h4>
+                                <p class="mb-4 text-slate-600">Tata Forage</p><span
+                                    class="badge w-fit mx-auto">2025</span>
+                            </div>
+                        </div>
+                        <a href="#" target="_blank" class="cert-back group">
+                            <img src="./assets/image copy 2.png" alt="Tata Forage QR" class="w-28 h-28 mx-auto mb-3 rounded-lg border border-primary/20" />
+                            <p class="text-xs text-slate-500 mb-4">Scan QR to verify certificate</p>
+                            <span class="text-primary group-hover:text-secondary transition-colors font-semibold flex items-center gap-2"><i class="fas fa-link"></i> View Credential</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Cert 6 -->
+                <div class="cert-card-container cert-lr aspect-square w-full max-w-[320px]" data-dir="right">
+                    <div class="cert-card-inner">
+                        <div class="cert-front">
+                            <div class="cert-alt-icon text-5xl mb-2">⚡</div>
+                            <div class="cert-alt-body">
+                                <h4 class="text-xl mb-2">Data Structures &amp; Algo</h4>
+                                <p class="mb-4 text-slate-600">Apna College</p><span
+                                    class="badge w-fit mx-auto">2026</span>
+                            </div>
+                        </div>
+                        <a href="https://media.geeksforgeeks.org/courses/certificates/5f44e29f1d4fc491aaa9eb12ca33fd24.pdf" target="_blank" class="cert-back group">
+                            <p class="text-sm text-slate-700 mb-6 leading-relaxed">Enhanced problem solving skills
+                                focusing on runtime efficiency through complex sorting, graphing, and structural
+                                algorithms.</p>
+                            <span
+                                class="text-primary group-hover:text-secondary transition-colors font-semibold flex items-center gap-2"><i
+                                    class="fas fa-link"></i> View Credential</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Cert 7 -->
+                <div class="cert-card-container cert-lr aspect-square w-full max-w-[320px] sm:col-span-2"
+                    data-dir="left">
+                    <div class="cert-card-inner">
+                        <div class="cert-front"
+                            style="border-color:rgba(16,185,129,.4);background:rgba(16,185,129,.05)">
+                            <div class="cert-alt-icon text-5xl mb-2">🏆</div>
+                            <div class="cert-alt-body">
+                                <h4 class="text-xl mb-2 text-gray-900">Patent Published</h4>
+                                <p style="color:#10b981" class="text-sm mb-4 leading-relaxed">&ldquo;Next-Gen Smart
+                                    Inkless Pen: Revolutionizing Writing with AI&rdquo;</p>
+                                <span class="badge w-fit mx-auto"
+                                    style="background:rgba(16,185,129,.15);color:#10b981;border-color:rgba(16,185,129,.3)">2024</span>
+                            </div>
+                        </div>
+                        <a href="https://github.com/mukundkhandelwal463/AI_Patent_and_Project/blob/main/ai%20patent/Ink%20less%20pen.docx" target="_blank" class="cert-back group"
+                            style="border-color:rgba(16,185,129,.4);background:rgba(16,185,129,.08)">
+                            <p class="text-sm text-slate-700 mb-6 leading-relaxed">Inventor of a hardware + AI concept
+                                reducing ink waste, integrating movement-sensor predictions for continuous writing
+                                feedback.</p>
+                            <span style="color:#10b981"
+                                class="font-semibold flex items-center gap-2 group-hover:text-gray-900 transition-colors"><i
+                                    class="fas fa-link"></i> View Patent Docs</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!-- PROJECTS — giant marquee + floating cards -->
+    <section id="projects" style="height:100vh; position:relative; overflow:hidden;">
+        <div style="height:100vh; width:100%; position:relative;">
+            <!-- Tiny label top-left -->
+            <div
+                style="position:absolute;top:32px;left:40px;font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(22,163,74,.55);z-index:10">
+                // What I've Built</div>
+
+            <!-- Giant scrolling text -->
+            <div style="position:absolute;inset:0;display:flex;align-items:center;">
+                <div class="proj-marquee-inner" id="proj-marquee">
+                    <span class="proj-bigname">Royal</span>
+                    <span class="proj-bigname accent">Wheels</span>
+                    <span class="proj-amp">&amp;</span>
+                    <span class="proj-bigname">AI</span>
+                    <span class="proj-bigname accent">Resume</span>
+                    <span class="proj-amp">&amp;</span>
+                    <span class="proj-bigname">Accident</span>
+                    <span class="proj-bigname accent">Predict</span>
+                    <span class="proj-amp">&amp;</span>
+                    <span class="proj-bigname">Netflix</span>
+                    <span class="proj-bigname accent">Dashboard</span>
+                </div>
+            </div>
+
+            <!-- Floating project cards (absolutely positioned, appear at scroll points) -->
+            <!-- Card 1 -->
+            <div class="proj-float" id="pf1"
+                style="top:50%;left:50%;opacity:0;background:linear-gradient(135deg,#ffffff,#f8fafc);">
+                <div class="proj-float-inner">
+                    <div class="pf-num">Project 01</div>
+                    <div style="font-size:2rem">🚗</div>
+                    <div class="pf-title">RoyalWheels</div>
+                    <div class="pf-desc">Full-Stack Vehicle Rental Platform — scalable booking with real-time
+                        availability control.</div>
+                    <div class="pf-tags"><span class="badge">Django</span><span class="badge">Python</span><span
+                            class="badge">SQLite</span><span class="badge">REST APIs</span></div>
+                    <div style="display:flex; gap:16px; margin-top:20px; pointer-events:all;">
+                        <a href="https://github.com/mukundkhandelwal463/RoyalWheels" target="_blank"
+                            class="text-slate-600 hover:text-gray-900 transition-colors" title="GitHub"><i
+                                class="fab fa-github text-xl"></i></a>
+                        <a href="https://linkedin.com/in/mukund-khandelwal-6a8663283" target="_blank"
+                            class="text-slate-600 hover:text-[#111111] transition-colors" title="LinkedIn"><i
+                                class="fab fa-linkedin text-xl"></i></a>
+                        <a href="https://github.com/mukundkhandelwal463/RoyalWheels" target="_blank"
+                            class="text-slate-600 hover:text-[#15803d] transition-colors" title="Live Site"><i
+                                class="fas fa-external-link-alt text-xl"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="proj-float" id="pf2"
+                style="top:50%;left:50%;opacity:0;background:linear-gradient(135deg,#ffffff,#f8fafc);">
+                <div class="proj-float-inner">
+                    <div class="pf-num">Project 02</div>
+                    <div style="font-size:2rem">🤖</div>
+                    <div class="pf-title">AI Resume Analyzer</div>
+                    <div class="pf-desc">End-to-end AI resume parsing, ATS scoring &amp; job recommendation via NLP
+                        pipeline.</div>
+                    <div class="pf-tags"><span class="badge">Flask</span><span class="badge">spaCy</span><span
+                            class="badge">Scikit-learn</span><span class="badge">MongoDB</span></div>
+                    <div style="display:flex; gap:16px; margin-top:20px; pointer-events:all;">
+                        <a href="https://github.com/mukundkhandelwal463/AI-powered-Resume-Screener" target="_blank"
+                            class="text-slate-600 hover:text-gray-900 transition-colors" title="GitHub"><i
+                                class="fab fa-github text-xl"></i></a>
+                        <a href="https://linkedin.com/in/mukund-khandelwal-6a8663283" target="_blank"
+                            class="text-slate-600 hover:text-[#111111] transition-colors" title="LinkedIn"><i
+                                class="fab fa-linkedin text-xl"></i></a>
+                        <a href="https://github.com/mukundkhandelwal463/AI-powered-Resume-Screener" target="_blank"
+                            class="text-slate-600 hover:text-[#15803d] transition-colors" title="Live Site"><i
+                                class="fas fa-external-link-alt text-xl"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="proj-float" id="pf3"
+                style="top:50%;left:50%;opacity:0;background:linear-gradient(135deg,#ffffff,#f8fafc);">
+                <div class="proj-float-inner">
+                    <div class="pf-num">Project 03</div>
+                    <div style="font-size:2rem">🚨</div>
+                    <div class="pf-title">Accident Severity Prediction</div>
+                    <div class="pf-desc">ML model predicting road accident severity — Random Forest + Streamlit Cloud
+                        deployment.</div>
+                    <div class="pf-tags"><span class="badge">Random Forest</span><span
+                            class="badge">Pandas</span><span class="badge">Streamlit</span></div>
+                    <div style="display:flex; gap:16px; margin-top:20px; pointer-events:all;">
+                        <a href="https://github.com/mukundkhandelwal463/mukundkhandelwal463-Accident-Prediction-With-Pipeline/tree/main"
+                            target="_blank" class="text-slate-600 hover:text-gray-900 transition-colors"
+                            title="GitHub"><i class="fab fa-github text-xl"></i></a>
+                        <a href="https://linkedin.com/in/mukund-khandelwal-6a8663283" target="_blank"
+                            class="text-slate-600 hover:text-[#111111] transition-colors" title="LinkedIn"><i
+                                class="fab fa-linkedin text-xl"></i></a>
+                        <a href="https://github.com/mukundkhandelwal463/mukundkhandelwal463-Accident-Prediction-With-Pipeline/tree/main"
+                            target="_blank" class="text-slate-600 hover:text-[#15803d] transition-colors"
+                            title="Live Site"><i class="fas fa-external-link-alt text-xl"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 4 -->
+            <div class="proj-float" id="pf4"
+                style="top:50%;left:50%;opacity:0;background:linear-gradient(135deg,#ffffff,#f8fafc);">
+                <div class="proj-float-inner">
+                    <div class="pf-num">Project 04</div>
+                    <div style="font-size:2rem">📊</div>
+                    <div class="pf-title">Netflix Data Dashboard</div>
+                    <div class="pf-desc">Interactive Power BI dashboard — yearly trends, genre distributions &amp;
+                        content KPIs.</div>
+                    <div class="pf-tags"><span class="badge">Power BI</span><span class="badge">Excel</span><span
+                            class="badge">Pivot Tables</span></div>
+                    <div style="display:flex; gap:16px; margin-top:20px; pointer-events:all;">
+                        <a href="https://github.com/mukundkhandelwal463/Netflix-Movies-Analysis-Dashboard"
+                            target="_blank" class="text-slate-600 hover:text-gray-900 transition-colors"
+                            title="GitHub"><i class="fab fa-github text-xl"></i></a>
+                        <a href="https://linkedin.com/in/mukundkhandelwal-6a8663283" target="_blank"
+                            class="text-slate-600 hover:text-[#111111] transition-colors" title="LinkedIn"><i
+                                class="fab fa-linkedin text-xl"></i></a>
+                        <a href="https://github.com/mukundkhandelwal463/Netflix-Movies-Analysis-Dashboard"
+                            target="_blank" class="text-slate-600 hover:text-[#15803d] transition-colors"
+                            title="Live Site"><i class="fas fa-external-link-alt text-xl"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress dots -->
+            <div id="proj-dots"
+                style="position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;gap:10px;">
+                <div class="pdot active"
+                    style="width:24px;height:4px;border-radius:2px;background:#16a34a;transition:all .3s"></div>
+                <div class="pdot"
+                    style="width:8px;height:4px;border-radius:2px;background:rgba(22,163,74,.25);transition:all .3s">
+                </div>
+                <div class="pdot"
+                    style="width:8px;height:4px;border-radius:2px;background:rgba(22,163,74,.25);transition:all .3s">
+                </div>
+                <div class="pdot"
+                    style="width:8px;height:4px;border-radius:2px;background:rgba(22,163,74,.25);transition:all .3s">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects List Style - Nested Stacking Cards that Slide in Right to Left -->
+    <section id="projects-list" class="relative z-10 w-full bg-gray-50">
+        <div class="w-full relative">
+            <div class="text-center mb-16 hidden">
+                <h2
+                    class="text-4xl md:text-5xl uppercase tracking-widest flex flex-wrap justify-center mb-10 text-gray-900 lang-title">
+                    <span class="font-extralight opacity-80">Case Studies</span>
+                </h2>
+            </div>
+
+            <div class="proj-list-container relative w-full">
+                <!-- Stacking Cards wrapper -->
+                <div class="pb-0 w-full">
+
+                    <!-- Project 1 -->
+                    <div class="proj-list-card sticky top-[80px] w-full z-[1]" style="min-height: calc(100vh - 80px);">
+                        <div
+                            class="w-full min-h-[calc(100vh-80px)] bg-gradient-to-br from-[#ffffff] via-[#f8fafc] to-[#f8fafc] border-t border-gray-200 shadow-[0_-10px_30px_rgba(0,0,0,0.05)] r2l-stack flex items-center relative overflow-hidden">
+                            <!-- Subtle mesh glow -->
+                            <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full hidden">
+                            </div>
+
+                            <div
+                                class="max-w-6xl mx-auto px-6 py-12 md:py-16 flex flex-col md:flex-row gap-6 md:gap-12 w-full relative z-10">
+                                <div class="w-full md:w-1/4">
+                                    <div
+                                        class="relative group perspective-1000 transform transition-transform duration-500 hover:scale-105">
+                                        <div
+                                            class="absolute inset-0 bg-[#16a34a] rounded-2xl hidden transition-opacity duration-500">
+                                        </div>
+                                        <div
+                                            class="relative w-full aspect-square rounded-2xl overflow-hidden border border-[#16a34a]/30 shadow-md bg-white p-2 border border-[#16a34a]/30">
+                                            <div class="w-full h-full rounded-xl overflow-hidden relative">
+                                                <img src="./assets/proj1_wheel.png" alt="Project Illustration"
+                                                    class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110">
+                                                <div
+                                                    class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-60">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-full md:w-3/4">
+                                    <h3 style="font-family: 'Space Grotesk', sans-serif;"
+                                        class="text-4xl md:text-5xl font-extrabold mb-6 text-gray-900 tracking-tighter">
+                                        RoyalWheels</h3>
+                                    <ul
+                                        class="text-lg md:text-xl leading-relaxed mb-8 list-none space-y-4" style="color:#166534">
+                                        <li class="flex items-start gap-3"><span class="text-primary mt-1">▹</span>
+                                            Built an enterprise-grade Full-Stack Vehicle Rental Platform handling
+                                            high-volume transactions.</li>
+                                        <li class="flex items-start gap-3"><span class="text-primary mt-1">▹</span>
+                                            Engineered scalable booking capabilities with granular, real-time
+                                            availability control.</li>
+                                        <li class="flex items-start gap-3"><span class="text-primary mt-1">▹</span>
+                                            Integrated advanced role-based authentication to securely separate user and
+                                            admin flows.</li>
+                                        <li class="flex items-start gap-3"><span class="text-primary mt-1">▹</span>
+                                            Developed machine-learning-inspired dynamic pricing algorithms adapting to
+                                            supply & demand metrics.</li>
+                                        <li class="flex items-start gap-3"><span class="text-primary mt-1">▹</span>
+                                            Designed a highly responsive user dashboard tailored for seamless parallel
+                                            booking operations.</li>
+                                    </ul>
+                                    <div class="flex flex-col gap-4 text-lg mb-8" style="color:#166534">
+                                        <div class="flex flex-wrap items-center gap-2"><span class="text-slate-400 font-mono text-sm">01</span><span class="badge">Django</span><span class="badge">Python</span><span class="badge">SQLite</span></div>
+                                        <div class="flex flex-wrap items-center gap-2"><span class="text-slate-400 font-mono text-sm">02</span><span class="badge">REST APIs</span><span class="badge">JWT
+                                                Auth</span></div>
+                                    </div>
+                                    <div class="flex gap-4">
+                                        <a href="#"
+                                            class="px-6 py-3 rounded-full bg-primary/20 text-primary hover:bg-primary hover:text-gray-900 transition-colors border border-primary/50 font-semibold flex items-center gap-2"><i
+                                                class="fab fa-github"></i> GitHub</a>
+                                        <a href="#"
+                                            class="px-6 py-3 rounded-full bg-secondary/20 text-secondary hover:bg-secondary hover:text-[#050505] transition-colors border border-secondary/50 font-semibold flex items-center gap-2"><i
+                                                class="fas fa-external-link-alt"></i> Live Demo</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="proj-list-card sticky top-[80px] w-full z-[2]" style="min-height: calc(100vh - 80px);">
+                        <div
+                            class="w-full min-h-[calc(100vh-80px)] bg-gradient-to-bl from-[#ffffff] via-[#f8fafc] to-[#f8fafc] border-t border-gray-200 shadow-[0_-10px_30px_rgba(0,0,0,0.05)] r2l-stack flex items-center relative overflow-hidden">
+                            <div
+                                class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-secondary/10 rounded-full hidden">
+                            </div>
+
+                            <div
+                                class="max-w-6xl mx-auto px-6 py-12 md:py-16 flex flex-col md:flex-row gap-6 md:gap-12 w-full relative z-10">
+                                <div class="w-full md:w-1/4">
+                                    <div
+                                        class="relative group perspective-1000 transform transition-transform duration-500 hover:scale-105">
+                                        <div
+                                            class="absolute inset-0 bg-[#111111] rounded-2xl hidden transition-opacity duration-500">
+                                        </div>
+                                        <div
+                                            class="relative w-full aspect-square rounded-2xl overflow-hidden border border-[#111111]/30 shadow-md bg-white p-2 border border-[#16a34a]/30">
+                                            <div class="w-full h-full rounded-xl overflow-hidden relative">
+                                                <img src="./assets/proj2_ai.png" alt="Project Illustration"
+                                                    class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110">
+                                                <div
+                                                    class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-60">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-full md:w-3/4">
+                                    <h3 style="font-family: 'Space Grotesk', sans-serif;"
+                                        class="text-4xl md:text-5xl font-extrabold mb-6 text-gray-900 tracking-tighter">
+                                        AI
+                                        Resume Analyzer</h3>
+                                    <ul
+                                        class="text-lg md:text-xl leading-relaxed mb-8 list-none space-y-4" style="color:#166534">
+                                        <li class="flex items-start gap-3"><span class="text-secondary mt-1">▹</span>
+                                            Engineered an end-to-end AI resume parsing pipeline to resolve strict
+                                            recruiter bottlenecks.</li>
+                                        <li class="flex items-start gap-3"><span class="text-secondary mt-1">▹</span>
+                                            Leveraged advanced NLP to dramatically slash candidate screening time by
+                                            over 70%.</li>
+                                        <li class="flex items-start gap-3"><span class="text-secondary mt-1">▹</span>
+                                            Built custom spaCy NER models to autonomously extract entities like skills
+                                            and education.</li>
+                                        <li class="flex items-start gap-3"><span class="text-secondary mt-1">▹</span>
+                                            Implemented an unsupervised clustering algorithm boosting candidate-job
+                                            match accuracy.</li>
+                                        <li class="flex items-start gap-3"><span class="text-secondary mt-1">▹</span>
+                                            Delivered an intuitive visual dashboard allowing recruiters to sift through
+                                            thousands of profiles instantly.</li>
+                                    </ul>
+                                    <div class="flex flex-col gap-4 text-lg mb-8" style="color:#166534">
+                                        <div class="flex flex-wrap items-center gap-2"><span class="text-slate-400 font-mono text-sm">01</span><span class="badge">Flask</span><span class="badge">Python</span><span class="badge">MongoDB</span></div>
+                                        <div class="flex flex-wrap items-center gap-2"><span class="text-slate-400 font-mono text-sm">02</span><span class="badge">spaCy</span><span class="badge">Scikit-learn</span><span class="badge">NLTK</span></div>
+                                    </div>
+                                    <div class="flex gap-4">
+                                        <a href="#"
+                                            class="px-6 py-3 rounded-full bg-primary/20 text-primary hover:bg-primary hover:text-gray-900 transition-colors border border-primary/50 font-semibold flex items-center gap-2"><i
+                                                class="fab fa-github"></i> GitHub</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="proj-list-card sticky top-[80px] w-full z-[3]" style="min-height: calc(100vh - 80px);">
+                        <div
+                            class="w-full min-h-[calc(100vh-80px)] bg-gradient-to-tr from-[#f0fdf4] via-[#ffffff] to-[#ffffff] border-t border-gray-200 shadow-[0_-10px_30px_rgba(0,0,0,0.05)] r2l-stack flex items-center relative overflow-hidden">
+                            <div
+                                class="hidden">
+                            </div>
+
+                            <div
+                                class="max-w-6xl mx-auto px-6 py-12 md:py-16 flex flex-col md:flex-row gap-6 md:gap-12 w-full relative z-10">
+                                <div class="w-full md:w-1/4">
+                                    <div
+                                        class="relative group perspective-1000 transform transition-transform duration-500 hover:scale-105">
+                                        <div
+                                            class="absolute inset-0 bg-[#15803d] rounded-2xl hidden transition-opacity duration-500">
+                                        </div>
+                                        <div
+                                            class="relative w-full aspect-square rounded-2xl overflow-hidden border border-[#15803d]/30 shadow-md bg-white p-2 border border-[#16a34a]/30">
+                                            <div class="w-full h-full rounded-xl overflow-hidden relative">
+                                                <img src="./assets/proj3_accident.png" alt="Project Illustration"
+                                                    class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110">
+                                                <div
+                                                    class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-60">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-full md:w-3/4">
+                                    <h3 style="font-family: 'Space Grotesk', sans-serif;"
+                                        class="text-4xl md:text-5xl font-extrabold mb-6 text-gray-900 tracking-tighter">
+                                        Accident Severity Prediction</h3>
+                                    <ul
+                                        class="text-lg md:text-xl leading-relaxed mb-8 list-none space-y-4" style="color:#166534">
+                                        <li class="flex items-start gap-3"><span class="text-[#15803d] mt-1">▹</span>
+                                            Developed a comprehensive machine learning model predicting road accident
+                                            severity for emergency units.</li>
+                                        <li class="flex items-start gap-3"><span class="text-[#15803d] mt-1">▹</span>
+                                            Trained and highly tuned a Random Forest classifier capable of processing
+                                            multidimensional datasets.</li>
+                                        <li class="flex items-start gap-3"><span class="text-[#15803d] mt-1">▹</span>
+                                            Deployed an interactive, seamless real-time alerting interface using
+                                            Streamlit Cloud.</li>
+                                        <li class="flex items-start gap-3"><span class="text-[#15803d] mt-1">▹</span>
+                                            Engineered feature extractions for weather patterns, road conditions, and
+                                            temporal data arrays.</li>
+                                        <li class="flex items-start gap-3"><span class="text-[#15803d] mt-1">▹</span>
+                                            Yielded highly actionable severity predictions to actively aid in
+                                            prioritized hazard prevention routing.</li>
+                                    </ul>
+                                    <div class="flex flex-col gap-4 text-lg mb-8" style="color:#166534">
+                                        <div class="flex flex-wrap items-center gap-2"><span class="text-slate-400 font-mono text-sm">01</span><span class="badge">Random Forest</span><span class="badge">XGBoost</span><span class="badge">Pandas</span></div>
+                                        <div class="flex gap-8"><span class="text-slate-500 font-mono">02</span>
+                                            <div class="flex gap-2 flex-wrap"><span class="badge">Streamlit</span><span
+                                                    class="badge">Python</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-4">
+                                        <a href="#"
+                                            class="px-6 py-3 rounded-full bg-primary/20 text-primary hover:bg-primary hover:text-gray-900 transition-colors border border-primary/50 font-semibold flex items-center gap-2"><i
+                                                class="fab fa-github"></i> GitHub</a>
+                                        <a href="#"
+                                            class="px-6 py-3 rounded-full bg-secondary/20 text-secondary hover:bg-secondary hover:text-[#050505] transition-colors border border-secondary/50 font-semibold flex items-center gap-2"><i
+                                                class="fas fa-external-link-alt"></i> Live App</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 4 -->
+                    <div class="proj-list-card sticky top-[80px] w-full z-[4]" style="min-height: calc(100vh - 80px);">
+                        <div
+                            class="w-full min-h-[calc(100vh-80px)] bg-gradient-to-tl from-[#f0fdf4] via-[#ffffff] to-[#ffffff] border-t border-gray-200 shadow-[0_-10px_30px_rgba(0,0,0,0.05)] r2l-stack flex items-center relative overflow-hidden">
+                            <div
+                                class="hidden">
+                            </div>
+
+                            <div
+                                class="max-w-6xl mx-auto px-6 py-12 md:py-16 flex flex-col md:flex-row gap-6 md:gap-12 w-full relative z-10">
+                                <div class="w-full md:w-1/4">
+                                    <div
+                                        class="relative group perspective-1000 transform transition-transform duration-500 hover:scale-105">
+                                        <div
+                                            class="absolute inset-0 bg-[#E50914] rounded-2xl hidden transition-opacity duration-500">
+                                        </div>
+                                        <div
+                                            class="relative w-full aspect-square rounded-2xl overflow-hidden border border-[#E50914]/30 shadow-md bg-white p-2 border border-[#16a34a]/30">
+                                            <div class="w-full h-full rounded-xl overflow-hidden relative">
+                                                <img src="./assets/proj4_netflix.png" alt="Project Illustration"
+                                                    class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110">
+                                                <div
+                                                    class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-60">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-full md:w-3/4">
+                                    <h3 style="font-family: 'Space Grotesk', sans-serif;"
+                                        class="text-4xl md:text-5xl font-extrabold mb-6 text-gray-900 tracking-tighter">
+                                        Netflix Data Dashboard</h3>
+                                    <ul
+                                        class="text-lg md:text-xl leading-relaxed mb-8 list-none space-y-4" style="color:#166534">
+                                        <li class="flex items-start gap-3"><span class="text-[#E50914] mt-1">▹</span>
+                                            Designed a visually immersive, deeply analytical dashboard aggregating
+                                            global streaming datasets.</li>
+                                        <li class="flex items-start gap-3"><span class="text-[#E50914] mt-1">▹</span>
+                                            Extracted insights uncovering macro trends in binge habits and regional
+                                            content preferences.</li>
+                                        <li class="flex items-start gap-3"><span class="text-[#E50914] mt-1">▹</span>
+                                            Highlighted pivotal shifts in genre popularity fluctuations across the last
+                                            streaming decade.</li>
+                                        <li class="flex items-start gap-3"><span class="text-[#E50914] mt-1">▹</span>
+                                            Modeled robust relational structures using complex DAX queries and data
+                                            transformation logic.</li>
+                                        <li class="flex items-start gap-3"><span class="text-[#E50914] mt-1">▹</span>
+                                            Translated millions of raw records into an intuitive visual story for
+                                            non-technical stakeholders.</li>
+                                    </ul>
+                                    <div class="flex flex-col gap-4 text-lg mb-8" style="color:#166534">
+                                        <div class="flex gap-8"><span
+                                                class="text-slate-500 font-mono">01</span><span>Power BI, DAX</span>
+                                        </div>
+                                        <div class="flex flex-wrap items-center gap-2"><span class="text-slate-400 font-mono text-sm">02</span><span class="badge">Data Modeling &
+                                                Cleaning</span></div>
+                                    </div>
+                                    <div class="flex gap-4">
+                                        <a href="#"
+                                            class="px-6 py-3 rounded-full bg-primary/20 text-primary hover:bg-primary hover:text-gray-900 transition-colors border border-primary/50 font-semibold flex items-center gap-2"><i
+                                                class="fab fa-github"></i> Data Source</a>
+                                        <a href="#"
+                                            class="px-6 py-3 rounded-full bg-secondary/20 text-secondary hover:bg-secondary hover:text-[#050505] transition-colors border border-secondary/50 font-semibold flex items-center gap-2"><i
+                                                class="fas fa-chart-line"></i> View Dashboard</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- EDUCATION -->
+    <section id="education" class="relative z-10 py-24 reveal overflow-hidden">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+
+                <h2
+                    class="text-4xl md:text-5xl uppercase tracking-widest flex flex-wrap justify-center mb-10 text-gray-900 lang-title">
+                    <span class="font-extralight opacity-80">E</span><span
+                        class="font-black tracking-tight">d</span><span class="font-black tracking-tight">u</span><span
+                        class="font-black tracking-tight">c</span><span class="font-black tracking-tight">a</span><span
+                        class="font-black tracking-tight">t</span><span class="font-black tracking-tight">i</span><span
+                        class="font-extralight opacity-80">o</span><span class="font-extralight opacity-80">n</span>
+                </h2>
+            </div>
+            <div class="relative max-w-4xl mx-auto py-10">
+                <!-- Center Line for Desktop -->
+                <div
+                    class="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary via-secondary to-accent opacity-30 transform -translate-x-1/2">
+                </div>
+                <!-- Left Line for Mobile -->
+                <div
+                    class="md:hidden absolute left-5 top-0 bottom-0 w-px bg-gradient-to-b from-primary via-secondary to-accent opacity-30">
+                </div>
+
+                <div class="space-y-12">
+                    <!-- Item 1: Left aligned on desktop -->
+                    <div class="relative w-full flex flex-col md:flex-row items-center justify-between edu-item"
+                        data-dir="-1">
+                        <!-- Center Dot (Desktop) -->
+                        <div
+                            class="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-8 h-8 items-center justify-center z-10">
+                            <div class="w-4 h-4 rounded-full bg-primary relative">
+                                <div class="absolute inset-0 bg-primary rounded-full animate-ping opacity-20"></div>
+                            </div>
+                        </div>
+
+                        <!-- Left Content -->
+                        <div class="w-full md:w-1/2 md:pr-14 lg:pr-16 order-2 md:order-1 relative">
+                            <!-- Mobile dot -->
+                            <div class="md:hidden absolute left-5 top-7 w-3 h-3 rounded-full bg-primary"
+                                style="transform:translateX(-5px); box-shadow: 0 0 10px #16a34a"></div>
+                            <div
+                                class="glass p-8 rounded-2xl ml-12 md:ml-0 md:text-right hover:border-primary/40 transition-colors">
+                                <div class="flex flex-col md:items-end gap-2 mb-2">
+                                    <span
+                                        class="text-xs text-primary font-mono bg-primary/10 px-3 py-1 rounded-full w-fit">2023
+                                        – Present</span>
+                                    <h3 class="font-bold text-xl">Lovely Professional University</h3>
+                                </div>
+                                <p class="text-slate-600 mt-1">B.Tech — Computer Science &amp; Engineering</p>
+                                <p class="text-xs text-slate-500 mt-1">CGPA: 7.5 | Jalandhar, Punjab</p>
+                                <p class="text-sm text-slate-700 mt-4 leading-relaxed"><strong
+                                        class="text-slate-600">Coursework:</strong> DSA, DBMS, OS, Machine Learning,
+                                    Computer Networks, Software Engineering</p>
+                            </div>
+                        </div>
+                        <!-- Right Empty space -->
+                        <div class="hidden md:block md:w-1/2 order-3"></div>
+                    </div>
+
+                    <!-- Item 2: Right aligned on desktop -->
+                    <div class="relative w-full flex flex-col md:flex-row items-center justify-between edu-item"
+                        data-dir="1">
+                        <!-- Center Dot (Desktop) -->
+                        <div
+                            class="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-8 h-8 items-center justify-center z-10">
+                            <div class="w-4 h-4 rounded-full"
+                                style="background:linear-gradient(135deg,#111111,#16a34a)">
+                                <div class="absolute inset-0 rounded-full animate-ping opacity-20"
+                                    style="background:linear-gradient(135deg,#111111,#16a34a)"></div>
+                            </div>
+                        </div>
+
+                        <!-- Left Empty space -->
+                        <div class="hidden md:block md:w-1/2 order-1"></div>
+
+                        <!-- Right Content -->
+                        <div class="w-full md:w-1/2 md:pl-14 lg:pl-16 order-2 relative mt-4 md:mt-0">
+                            <!-- Mobile dot -->
+                            <div class="md:hidden absolute left-5 top-7 w-3 h-3 rounded-full"
+                                style="transform:translateX(-5px); background:linear-gradient(135deg,#ffffff,#f8fafc); box-shadow: 0 0 10px #111111">
+                            </div>
+                            <div
+                                class="glass p-8 rounded-2xl ml-12 md:ml-0 md:text-left hover:border-[#111111]/40 transition-colors">
+                                <div class="flex flex-col md:items-start gap-2 mb-2">
+                                    <span
+                                        class="text-xs text-slate-600 font-mono bg-slate-800/50 px-3 py-1 rounded-full w-fit">2023</span>
+                                    <h3 class="font-bold text-xl">Genius Public School</h3>
+                                </div>
+                                <p class="text-slate-600 mt-1">12th Grade — Science (PCM)</p>
+                                <p class="text-xs text-slate-500 mt-1">Percentage: 89.5% | Dausa, Rajasthan</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 3: Left aligned on desktop -->
+                    <div class="relative w-full flex flex-col md:flex-row items-center justify-between edu-item"
+                        data-dir="-1">
+                        <!-- Center Dot (Desktop) -->
+                        <div
+                            class="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-8 h-8 items-center justify-center z-10">
+                            <div class="w-4 h-4 rounded-full"
+                                style="background:linear-gradient(135deg,#15803d,#16a34a)">
+                                <div class="absolute inset-0 rounded-full animate-ping opacity-20"
+                                    style="background:linear-gradient(135deg,#15803d,#16a34a)"></div>
+                            </div>
+                        </div>
+
+                        <!-- Left Content -->
+                        <div class="w-full md:w-1/2 md:pr-14 lg:pr-16 order-2 md:order-1 relative mt-4 md:mt-0">
+                            <!-- Mobile dot -->
+                            <div class="md:hidden absolute left-5 top-7 w-3 h-3 rounded-full"
+                                style="transform:translateX(-5px); background:linear-gradient(135deg,#ffffff,#f8fafc); box-shadow: 0 0 10px #15803d">
+                            </div>
+                            <div
+                                class="glass p-8 rounded-2xl ml-12 md:ml-0 md:text-right hover:border-[#15803d]/40 transition-colors">
+                                <div class="flex flex-col md:items-end gap-2 mb-2">
+                                    <span
+                                        class="text-xs text-slate-600 font-mono bg-slate-800/50 px-3 py-1 rounded-full w-fit">2021</span>
+                                    <h3 class="font-bold text-xl">Shekhawati Public School</h3>
+                                </div>
+                                <p class="text-slate-600 mt-1">10th Grade — Secondary</p>
+                                <p class="text-xs text-slate-500 mt-1">Percentage: 91% | Dausa, Rajasthan</p>
+                                <p class="text-emerald-400 text-sm mt-3 font-medium">🏆 1st Rank in Mathematics</p>
+                            </div>
+                        </div>
+                        <!-- Right Empty space -->
+                        <div class="hidden md:block md:w-1/2 order-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="relative z-10 py-24 reveal overflow-hidden">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="text-center mb-16">
+
+                <h2
+                    class="text-4xl md:text-5xl uppercase tracking-widest flex flex-wrap justify-center mb-10 text-gray-900 lang-title">
+                    <span class="font-extralight opacity-80">L</span><span
+                        class="font-black tracking-tight">e</span><span class="font-black tracking-tight">t</span><span
+                        class="font-extralight opacity-80">'</span><span
+                        class="font-extralight opacity-80">s</span>&nbsp;<span
+                        class="text-secondary/20">/</span>&nbsp;<span class="font-extralight opacity-80">W</span><span
+                        class="font-black tracking-tight">o</span><span class="font-extralight opacity-80">r</span><span
+                        class="font-extralight opacity-80">k</span>&nbsp;<span
+                        class="text-secondary/20">/</span>&nbsp;<span class="font-extralight opacity-80">T</span><span
+                        class="font-black tracking-tight">o</span><span class="font-black tracking-tight">g</span><span
+                        class="font-black tracking-tight">e</span><span class="font-black tracking-tight">t</span><span
+                        class="font-black tracking-tight">h</span><span class="font-extralight opacity-80">e</span><span
+                        class="font-extralight opacity-80">r</span>&nbsp;<span
+                        class="text-secondary/20">/</span>&nbsp;<span class="font-extralight opacity-80">F</span><span
+                        class="font-black tracking-tight">e</span><span class="font-black tracking-tight">e</span><span
+                        class="font-black tracking-tight">d</span><span class="font-black tracking-tight">b</span><span
+                        class="font-black tracking-tight">a</span><span class="font-extralight opacity-80">c</span><span
+                        class="font-extralight opacity-80">k</span>
+                </h2>
+                <p class="text-slate-600 mb-10 max-w-2xl mx-auto">I'm currently open to new opportunities. Share
+                    your feedback, invite me to a freelance project, or just drop a message to connect!</p>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-8">
+                <!-- Connect Info -->
+                <div class="w-full md:w-1/2 glass p-10 rounded-3xl flex flex-col justify-center">
+                    <h3 class="text-2xl font-bold mb-8 text-gray-900">Connect with me</h3>
+                    <div class="flex flex-col gap-6 mb-10">
+                        <a href="mailto:mukundkhandelwal463@gmail.com"
+                            class="flex items-center gap-4 glass px-6 py-5 rounded-2xl hover:border-primary/40 transition-all group">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-primary/15 flex items-center justify-center text-primary group-hover:scale-110 transition-transform text-xl flex-shrink-0">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="text-left w-full overflow-hidden">
+                                <div class="text-xs text-slate-500">Email</div>
+                                <div class="text-sm font-medium truncate">mukundkhandelwal463@gmail.com</div>
+                            </div>
+                        </a>
+                        <a href="https://linkedin.com/in/mukund-khandelwal-6a8663283" target="_blank"
+                            class="flex items-center gap-4 glass px-6 py-5 rounded-2xl hover:border-secondary/40 transition-all group">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-secondary/15 flex items-center justify-center text-secondary group-hover:scale-110 transition-transform text-xl flex-shrink-0">
+                                <i class="fab fa-linkedin-in"></i>
+                            </div>
+                            <div class="text-left w-full overflow-hidden">
+                                <div class="text-xs text-slate-500">LinkedIn</div>
+                                <div class="text-sm font-medium truncate">Mukund Khandelwal</div>
+                            </div>
+                        </a>
+                        <a href="https://github.com/mukundkhandelwal463" target="_blank"
+                            class="flex items-center gap-4 glass px-6 py-5 rounded-2xl hover:border-accent/40 transition-all group">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-accent/15 flex items-center justify-center text-accent group-hover:scale-110 transition-transform text-xl flex-shrink-0">
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <div class="text-left w-full overflow-hidden">
+                                <div class="text-xs text-slate-500">GitHub</div>
+                                <div class="text-sm font-medium truncate">mukundkhandelwal463</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Feedback Form -->
+                <div class="w-full md:w-1/2 glass p-10 rounded-3xl">
+                    <h3 class="text-2xl font-bold mb-8 text-gray-900">Send Feedback</h3>
+                    <form class="flex flex-col gap-5"
+                        onsubmit="event.preventDefault(); alert('Message sent successfully!');">
+                        <div class="flex flex-col gap-2">
+                            <label class="text-sm text-slate-600 font-mono">Your Name</label>
+                            <input type="text" required
+                                class="w-full bg-gray-100 border border-black/10 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:border-primary transition-colors"
+                                placeholder="Mukund Khandelwal">
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label class="text-sm text-slate-600 font-mono">Your Email</label>
+                            <input type="email" required
+                                class="w-full bg-gray-100 border border-black/10 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:border-primary transition-colors"
+                                placeholder="mukund@example.com">
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label class="text-sm text-slate-600 font-mono">Message / Feedback</label>
+                            <textarea rows="4" required
+                                class="w-full bg-gray-100 border border-black/10 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:border-primary transition-colors resize-none"
+                                placeholder="What do you think?"></textarea>
+                        </div>
+                        <button type="submit"
+                            class="mt-4 w-full px-8 py-4 rounded-xl bg-primary text-gray-900 font-semibold hover:bg-green-600 transition-colors shadow-md shadow-gray-200/50">Submit
+                            Feedback</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative z-10 py-8 border-t border-white/5">
+        <div
+            class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
+            <div class="font-mono font-bold text-lg"><span class="grad">MK.</span></div>
+            <p>&copy; 2026 Mukund Khandelwal — Designed with 💜 &amp; lots of ☕</p>
+            <div class="flex gap-4">
+                <a href="#hero" class="hover:text-primary transition-colors">Back to top ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts: load order matters — Lenis → GSAP → ScrollTrigger → Anime -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.35/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+    <script>
+        // === THEME ===
+        const themeBtn = document.getElementById('themeBtn');
+        const rootEl = document.documentElement;
+        // Always enforce dark mode for index.html
+        rootEl.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+        themeBtn.addEventListener('click', () => {
+            window.location.href = 'index.html';
+        });
+
+        // === GSAP + LENIS (zero-lag integration) ===
+        gsap.registerPlugin(ScrollTrigger);
+        const lenis = new Lenis({ duration: 1.4, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothTouch: false });
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add(time => lenis.raf(time * 1000));
+        gsap.ticker.lagSmoothing(0);
+        lenis.on('scroll', ({ scroll }) => {
+            document.getElementById('navbar').classList.toggle('scrolled', scroll > 60);
+        });
+
+        // === MARQUEE (inject) ===
+        const mqHTML = `<div class="marquee-wrap"><div class="marquee-track">${['Machine Learning', 'AI Systems', 'Data Engineering', 'Python Backend', 'Predictive Analytics', 'REST APIs', 'NLP / spaCy', 'Cloud Deploy', 'Power BI', 'Scikit-learn', 'MLOps'].map(t => `<span><i class="fas fa-circle-dot"></i>${t}</span>`).join('') + ['Machine Learning', 'AI Systems', 'Data Engineering', 'Python Backend', 'Predictive Analytics', 'REST APIs', 'NLP / spaCy', 'Cloud Deploy', 'Power BI', 'Scikit-learn', 'MLOps'].map(t => `<span><i class="fas fa-circle-dot"></i>${t}</span>`).join('')}</div></div>`;
+        document.getElementById('navbar').insertAdjacentHTML('afterend', mqHTML);
+
+        // === PRELOADER ===
+        let pct = 0;
+        const lf = document.getElementById('lf'), lpct = document.getElementById('lpct');
+        const iv = setInterval(() => {
+            pct += Math.random() * 12 + 4;
+            if (pct >= 100) { pct = 100; clearInterval(iv); }
+            lf.style.width = pct + '%';
+            lpct.textContent = Math.floor(pct) + '%';
+            if (pct >= 100) setTimeout(() => {
+                const pl = document.getElementById('preloader');
+                gsap.to(pl, { opacity: 0, duration: .7, onComplete() { pl.style.display = 'none'; startAnims(); } });
+            }, 300);
+        }, 70);
+
+        // === HERO ANIMS ===
+        function startAnims() {
+            try {
+                // Only hide hero elements initially (GSAP controls them)
+                gsap.set('#hero h1', { autoAlpha: 0, y: 60 });
+                gsap.set('.robot-wrap', { autoAlpha: 0, scale: 0.6, rotate: -12 });
+                gsap.set('#hero > div > div:first-child > p', { autoAlpha: 0, y: 30 });
+                gsap.set(['#hero .flex-wrap', '#hero .flex.gap-4', '#hero .inline-flex'], { autoAlpha: 0, y: 20 });
+
+                const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
+                tl.to('#hero h1', { autoAlpha: 1, y: 0, duration: 1 })
+                    .to('#hero > div > div:first-child > p', { autoAlpha: 1, y: 0, duration: 0.9, stagger: 0.1 }, '-=0.6')
+                    .to('.robot-wrap', { autoAlpha: 1, y: 0, scale: 1, rotate: 0, duration: 1.2, ease: 'back.out(1.5)' }, '-=0.8')
+                    .to('#hero .inline-flex', { autoAlpha: 1, y: 0, duration: 0.7 }, '-=0.6')
+                    .to('#hero .flex-wrap', { autoAlpha: 1, y: 0, duration: 0.8 }, '-=0.5')
+                    .to('#hero .flex.gap-4', { autoAlpha: 1, y: 0, duration: 0.7 }, '-=0.5');
+
+                // === SCROLL ANIMATIONS ===
+                // About — slide from left
+                gsap.fromTo('#about .flex-shrink-0',
+                    { x: -100, autoAlpha: 0 },
+                    {
+                        x: 0, autoAlpha: 1, duration: 1, ease: 'expo.out',
+                        scrollTrigger: { trigger: '#about', start: 'top 80%', toggleActions: 'play none none reverse' }
+                    });
+                gsap.fromTo('#about .flex-1 > *',
+                    { y: 50, autoAlpha: 0 },
+                    {
+                        y: 0, autoAlpha: 1, duration: 0.9, stagger: 0.1, ease: 'expo.out',
+                        scrollTrigger: { trigger: '#about', start: 'top 75%', toggleActions: 'play none none reverse' }
+                    });
+
+                // Skills
+                gsap.fromTo('#skills .text-center > *',
+                    { y: 40, autoAlpha: 0 },
+                    {
+                        y: 0, autoAlpha: 1, duration: 0.9, stagger: 0.1, ease: 'expo.out',
+                        scrollTrigger: { trigger: '#skills', start: 'top 82%', toggleActions: 'play none none reverse' }
+                    });
+                gsap.fromTo('#skills .glass',
+                    { y: 70, autoAlpha: 0, scale: 0.94 },
+                    {
+                        y: 0, autoAlpha: 1, scale: 1, duration: 0.9, stagger: 0.14, ease: 'back.out(1.3)',
+                        scrollTrigger: { trigger: '#skills', start: 'top 72%', toggleActions: 'play none none reverse' }
+                    });
+
+                // Skill bar fills
+                document.querySelectorAll('.skill-fill').forEach(bar => {
+                    ScrollTrigger.create({
+                        trigger: bar, start: 'top 90%',
+                        onEnter: () => gsap.to(bar, { width: bar.dataset.w + '%', duration: 1.4, ease: 'expo.out' }),
+                        onLeaveBack: () => gsap.to(bar, { width: '0%', duration: 0.4 })
+                    });
+                });
+
+                // Projects — giant marquee + floating cards
+                let projMarquee = document.getElementById('proj-marquee');
+                if (projMarquee) {
+                    let moveAmount = projMarquee.scrollWidth - window.innerWidth + window.innerWidth * 0.2; // Move it past the screen
+
+                    let ptl = gsap.timeline({
+                        scrollTrigger: {
+                            trigger: '#projects',
+                            start: 'top top',
+                            end: '+=450%', // Slower text scroll speed! Gives you more fine control over scrolling
+                            scrub: 1,
+                            pin: true
+                        }
+                    });
+
+                    // 1. Move the big text horizontally. Setting exactly duration 1 makes all percentages below map directly to the text position.
+                    ptl.to(projMarquee, { x: -moveAmount, ease: 'none', duration: 1 }, 0);
+
+                    // 2. Animate the floating cards sequentially in timeline 
+                    const cards = ['#pf1', '#pf2', '#pf3', '#pf4'];
+                    const dots = document.querySelectorAll('.pdot');
+                    const rots = [6, -7, 5, -5];
+
+                    // Pulling the times MUCH earlier to perfectly sync with the first letters "R", "A", "A", "N"
+                    const startTimes = [0.00, 0.22, 0.45, 0.72];
+
+                    cards.forEach((id, index) => {
+                        let startTime = startTimes[index];
+                        let duration = 0.02; // Super snappy entrance
+                        let holdTime = (index < cards.length - 1) ? (startTimes[index + 1] - startTime - duration - 0.03) : 0.15;
+
+                        gsap.set(id, { xPercent: -50, yPercent: -50, transformOrigin: 'center center' });
+
+                        // Card entrance
+                        ptl.fromTo(id,
+                            { opacity: 0, scale: 0, rotation: 0 },
+                            {
+                                opacity: 1, scale: 1.5, rotation: rots[index], duration: duration, ease: 'back.out(1.5)',
+                                onStart: () => updateDots(index),
+                                onReverseComplete: () => updateDots(Math.max(0, index - 1))
+                            },
+                            startTime
+                        );
+
+                        // Card exit
+                        if (index < cards.length - 1) {
+                            ptl.to(id, { opacity: 0, scale: 2, duration: duration, ease: 'power2.in' }, startTime + duration + holdTime);
+                        }
+                    });
+
+                    function updateDots(activeIdx) {
+                        dots.forEach((d, i) => {
+                            if (i === activeIdx) {
+                                d.style.background = '#16a34a';
+                                d.style.width = '24px';
+                            } else {
+                                d.style.background = 'rgba(22,163,74,.25)';
+                                d.style.width = '8px';
+                            }
+                        });
+                    }
+                }
+
+                // Education - Alternating left/right
+                document.querySelectorAll('.edu-item').forEach((item) => {
+                    const dir = parseFloat(item.dataset.dir) * 80;
+                    ScrollTrigger.create({
+                        trigger: item,
+                        start: 'top 85%',
+                        onEnter: () => gsap.fromTo(item, { x: dir, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: 1.5, ease: 'expo.out' }), // slow coming in
+                        onLeaveBack: () => gsap.to(item, { x: dir, autoAlpha: 0, duration: 0.3, ease: 'power2.in' }) // fast going out
+                    });
+                });
+
+                // Project cards Right-to-Left Stack overlapping slide
+                document.querySelectorAll('.r2l-stack').forEach((card, i) => {
+                    gsap.fromTo(card,
+                        { x: '100vw' },
+                        {
+                            x: 0,
+                            ease: 'power3.out', // Smoother easing
+                            scrollTrigger: {
+                                trigger: card.parentElement,
+                                start: 'top bottom',
+                                end: 'top 80px',
+                                scrub: 2.5 // Increased from 1 to 2.5 for much slower, smoother response
+                            }
+                        }
+                    );
+                });
+
+                // Certs — alternating left/right per card
+                document.querySelectorAll('.cert-lr').forEach((card, i) => {
+                    const dir = card.dataset.dir === 'right' ? 80 : -80;
+                    gsap.fromTo(card,
+                        { x: dir, autoAlpha: 0 },
+                        {
+                            x: 0, autoAlpha: 1, duration: 1, ease: 'power2.out',
+                            scrollTrigger: { trigger: card, start: 'top 95%', end: 'top 45%', scrub: 1 }
+                        });
+                });
+
+                // Section headings
+                document.querySelectorAll('section h2').forEach(h => {
+                    gsap.fromTo(h, { y: 50, autoAlpha: 0 }, {
+                        y: 0, autoAlpha: 1, duration: 1.5, ease: 'expo.out',
+                        scrollTrigger: {
+                            trigger: h,
+                            start: 'top 86%',
+                            onEnter: () => gsap.fromTo(h, { y: 50, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 1.5, ease: 'expo.out' }), // slow
+                            onLeaveBack: () => gsap.to(h, { y: 50, autoAlpha: 0, duration: 0.3, ease: 'power2.in' }) // fast
+                        }
+                    });
+                });
+
+                // Contact
+                document.querySelectorAll('#contact .glass.p-10').forEach(glass => {
+                    ScrollTrigger.create({
+                        trigger: glass,
+                        start: 'top 85%',
+                        onEnter: () => gsap.fromTo(glass, { y: 70, autoAlpha: 0, scale: 0.96 }, { y: 0, autoAlpha: 1, scale: 1, duration: 1.5, ease: 'expo.out' }), // Slow down
+                        onLeaveBack: () => gsap.to(glass, { y: 70, autoAlpha: 0, scale: 0.96, duration: 0.3, ease: 'power2.in' }) // Fast up
+                    });
+                });
+
+                // Blob parallax
+                gsap.to('.blob:first-of-type', {
+                    y: -100, ease: 'none',
+                    scrollTrigger: { trigger: 'body', start: 'top top', end: 'bottom bottom', scrub: 2 }
+                });
+                gsap.to('.blob:last-of-type', {
+                    y: 100, ease: 'none',
+                    scrollTrigger: { trigger: 'body', start: 'top top', end: 'bottom bottom', scrub: 2 }
+                });
+
+                // Marquee hover pause
+                const mt = document.querySelector('.marquee-track');
+                if (mt) {
+                    mt.parentElement.addEventListener('mouseenter', () => mt.style.animationPlayState = 'paused');
+                    mt.parentElement.addEventListener('mouseleave', () => mt.style.animationPlayState = 'running');
+                }
+
+            } catch (e) {
+                console.warn('GSAP animation error:', e);
+            }
+        }
+
+        // === CUSTOM CURSOR (GSAP quickTo for max performance) ===
+        const dot = document.getElementById('cursor-dot');
+        const ring = document.getElementById('cursor-ring');
+        const moveDotX = gsap.quickTo(dot, 'left', { duration: 0.1, ease: 'power3.out' });
+        const moveDotY = gsap.quickTo(dot, 'top', { duration: 0.1, ease: 'power3.out' });
+        const moveRingX = gsap.quickTo(ring, 'left', { duration: 0.45, ease: 'power3.out' });
+        const moveRingY = gsap.quickTo(ring, 'top', { duration: 0.45, ease: 'power3.out' });
+        window.addEventListener('mousemove', e => {
+            moveDotX(e.clientX); moveDotY(e.clientY);
+            moveRingX(e.clientX); moveRingY(e.clientY);
+        });
+        // Expand ring on hover over interactive elements
+        document.querySelectorAll('a, button, .proj-card, .cert-card').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                gsap.to(ring, { width: 58, height: 58, borderColor: 'rgba(17,17,17,.7)', duration: .25 });
+                gsap.to(dot, { background: '#111111', boxShadow: '0 0 18px rgba(17,17,17,.9)', scale: 1.4, duration: .2 });
+            });
+            el.addEventListener('mouseleave', () => {
+                gsap.to(ring, { width: 36, height: 36, borderColor: 'rgba(22,163,74,.5)', duration: .25 });
+                gsap.to(dot, { background: '#16a34a', boxShadow: '0 0 12px rgba(22,163,74,.8)', scale: 1, duration: .2 });
+            });
+        });
+
+        // === PARTICLES.JS MESH ===
+        const particlesDiv = document.createElement('div');
+        particlesDiv.id = 'particles-js';
+        particlesDiv.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;';
+        document.body.insertBefore(particlesDiv, document.body.firstChild);
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": ["#16a34a", "#111111"] },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.4, "random": false },
+                "size": { "value": 2, "random": true },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#16a34a",
+                    "opacity": 0.25,
+                    "width": 1
+                },
+                "move": { "enable": true, "speed": 1.5, "direction": "none", "random": true, "out_mode": "out" }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": { "enable": true, "mode": "grab" },
+                    "onclick": { "enable": true, "mode": "push" },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": { "distance": 140, "line_linked": { "opacity": 0.6 } },
+                    "push": { "particles_nb": 3 }
+                }
+            },
+            "retina_detect": true
+        });
+
+        // === TYPEWRITER ===
+        const names = ['Mukund Khandelwal', 'a Data Scientist', 'an ML Engineer', 'a Python Dev', 'Mukund Khandelwal'];
+        const typedEl = document.getElementById('typed-name');
+        let ni = 0, ci = 0, isDeleting = false;
+        function type() {
+            const cur = names[ni];
+            if (!isDeleting) { typedEl.textContent = cur.slice(0, ++ci); if (ci === cur.length) { isDeleting = true; setTimeout(type, 1800); return; } }
+            else { typedEl.textContent = cur.slice(0, --ci); if (ci === 0) { isDeleting = false; ni = (ni + 1) % names.length; setTimeout(type, 400); return; } }
+            setTimeout(type, isDeleting ? 55 : 85);
+        }
+        setTimeout(type, 1200);
+
+        // === ROBOT MOUSE PARALLAX ===
+        document.addEventListener('mousemove', e => {
+            const rx = ((e.clientX / window.innerWidth) - .5) * 12;
+            const ry = ((e.clientY / window.innerHeight) - .5) * 8;
+            gsap.to('.robot-wrap svg', { rotationY: rx, rotationX: -ry, duration: .6, ease: 'power2.out', transformPerspective: 800 });
+        });
+
+    </script>
+</body>
+
+</html>

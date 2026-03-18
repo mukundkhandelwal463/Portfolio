@@ -1,0 +1,16 @@
+{
+  "name": "profile-portfolio",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Mukund portfolio with Netlify email function",
+  "scripts": {
+    "dev": "netlify dev --port 8888"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "nodemailer": "^6.9.16"
+  },
+  "devDependencies": {
+    "netlify-cli": "^24.3.0"
+  }
+}

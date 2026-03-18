@@ -1426,6 +1426,8 @@
 
     <!-- ABOUT -->
     <section id="about" class="relative z-10 py-24 reveal">
+        <div
+            class="pointer-events-none absolute inset-x-0 top-8 text-center font-black uppercase tracking-[0.28em] text-[clamp(4rem,17vw,12rem)] leading-none text-black/[0.05] select-none">About</div>
         <div class="max-w-6xl mx-auto px-6">
             <div class="flex flex-col lg:flex-row gap-12 items-center">
                 <!-- Profile photo -->
@@ -1485,6 +1487,8 @@
 
     <!-- SKILLS -->
     <section id="skills" class="relative z-10 py-24 reveal">
+        <div
+            class="pointer-events-none absolute inset-x-0 top-8 text-center font-black uppercase tracking-[0.28em] text-[clamp(4rem,17vw,12rem)] leading-none text-black/[0.05] select-none">Skills</div>
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-16">
 
@@ -1795,6 +1799,8 @@
     <!-- PROJECTS — giant marquee + floating cards -->
     <section id="projects" style="height:100vh; position:relative; overflow:hidden;">
         <div style="height:100vh; width:100%; position:relative;">
+            <div
+                class="pointer-events-none absolute inset-x-0 top-10 text-center font-black uppercase tracking-[0.28em] text-[clamp(4rem,17vw,12rem)] leading-none text-black/[0.05] select-none z-0">Projects</div>
             <!-- Tiny label top-left -->
             <div
                 style="position:absolute;top:32px;left:40px;font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(22,163,74,.55);z-index:10">
@@ -2214,6 +2220,8 @@
     </section>
     <!-- EDUCATION -->
     <section id="education" class="relative z-10 py-24 reveal overflow-hidden">
+        <div
+            class="pointer-events-none absolute inset-x-0 top-8 text-center font-black uppercase tracking-[0.28em] text-[clamp(4rem,17vw,12rem)] leading-none text-black/[0.05] select-none">Education</div>
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-16">
 
@@ -2348,6 +2356,8 @@
 
     <!-- CONTACT -->
     <section id="contact" class="relative z-10 py-24 reveal overflow-hidden">
+        <div
+            class="pointer-events-none absolute inset-x-0 top-8 text-center font-black uppercase tracking-[0.28em] text-[clamp(4rem,17vw,12rem)] leading-none text-black/[0.05] select-none">Contact</div>
         <div class="max-w-5xl mx-auto px-6">
             <div class="text-center mb-16">
 
@@ -2419,29 +2429,29 @@
                 <!-- Feedback Form -->
                 <div class="w-full md:w-1/2 glass p-10 rounded-3xl">
                     <h3 class="text-2xl font-bold mb-8 text-gray-900">Send Feedback</h3>
-                    <form class="flex flex-col gap-5"
-                        onsubmit="event.preventDefault(); alert('Message sent successfully!');">
+                    <form class="flex flex-col gap-5" id="feedbackForm">
                         <div class="flex flex-col gap-2">
                             <label class="text-sm text-slate-600 font-mono">Your Name</label>
-                            <input type="text" required
+                            <input type="text" name="name" required
                                 class="w-full bg-gray-100 border border-black/10 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:border-primary transition-colors"
                                 placeholder="Mukund Khandelwal">
                         </div>
                         <div class="flex flex-col gap-2">
                             <label class="text-sm text-slate-600 font-mono">Your Email</label>
-                            <input type="email" required
+                            <input type="email" name="email" required
                                 class="w-full bg-gray-100 border border-black/10 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:border-primary transition-colors"
                                 placeholder="mukund@example.com">
                         </div>
                         <div class="flex flex-col gap-2">
                             <label class="text-sm text-slate-600 font-mono">Message / Feedback</label>
-                            <textarea rows="4" required
+                            <textarea rows="4" name="message" required
                                 class="w-full bg-gray-100 border border-black/10 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:border-primary transition-colors resize-none"
                                 placeholder="What do you think?"></textarea>
                         </div>
                         <button type="submit"
                             class="mt-4 w-full px-8 py-4 rounded-xl bg-primary text-gray-900 font-semibold hover:bg-green-600 transition-colors shadow-md shadow-gray-200/50">Submit
                             Feedback</button>
+                        <p id="feedbackStatus" class="text-sm text-slate-600 min-h-[1.25rem]"></p>
                     </form>
                 </div>
             </div>
@@ -2785,6 +2795,80 @@
             const ry = ((e.clientY / window.innerHeight) - .5) * 8;
             gsap.to('.robot-wrap svg', { rotationY: rx, rotationX: -ry, duration: .6, ease: 'power2.out', transformPerspective: 800 });
         });
+
+        // === FEEDBACK FORM ===
+        const feedbackForm = document.getElementById('feedbackForm');
+        const feedbackStatus = document.getElementById('feedbackStatus');
+        if (feedbackForm) {
+            feedbackForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
+
+                const formData = new FormData(feedbackForm);
+                const name = (formData.get('name') || '').toString().trim();
+                const email = (formData.get('email') || '').toString().trim();
+                const message = (formData.get('message') || '').toString().trim();
+                const submitButton = feedbackForm.querySelector('button[type="submit"]');
+                const originalButtonText = submitButton ? submitButton.innerHTML : '';
+
+                if (feedbackStatus) {
+                    feedbackStatus.textContent = 'Sending message...';
+                    feedbackStatus.className = 'text-sm text-slate-600 min-h-[1.25rem]';
+                }
+
+                if (submitButton) {
+                    submitButton.disabled = true;
+                    submitButton.innerHTML = 'Sending...';
+                }
+
+                try {
+                    const response = await fetch('/.netlify/functions/send-feedback', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            name,
+                            email,
+                            message
+                        })
+                    });
+
+                    const responseText = await response.text();
+                    let result = {};
+
+                    if (responseText) {
+                        try {
+                            result = JSON.parse(responseText);
+                        } catch (parseError) {
+                            if (!response.ok) {
+                                throw new Error('Email service is unavailable. Run this on Netlify or start the Netlify function locally.');
+                            }
+                            throw new Error('Unexpected response from email service.');
+                        }
+                    }
+
+                    if (!response.ok) {
+                        throw new Error(result.error || 'Email send failed.');
+                    }
+
+                    feedbackForm.reset();
+                    if (feedbackStatus) {
+                        feedbackStatus.textContent = result.message || 'Message sent successfully. A thank-you email has been sent too.';
+                        feedbackStatus.className = 'text-sm text-emerald-600 min-h-[1.25rem]';
+                    }
+                } catch (error) {
+                    if (feedbackStatus) {
+                        feedbackStatus.textContent = error.message || 'Unable to send message.';
+                        feedbackStatus.className = 'text-sm text-red-600 min-h-[1.25rem]';
+                    }
+                } finally {
+                    if (submitButton) {
+                        submitButton.disabled = false;
+                        submitButton.innerHTML = originalButtonText;
+                    }
+                }
+            });
+        }
 
     </script>
 </body>

@@ -1,0 +1,331 @@
+﻿
+  index.html:1460:        <div style="height:100vh; width:100%; position:relative;">
+  index.html:1461:            <!-- Tiny label top-left -->
+  index.html:1462:            <div
+  index.html:1463:                style="position:absolute;top:32px;left:40px;font-family:'Space 
+Mono',monospace;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(139,92,246,.55);z-index:10">
+  index.html:1464:                // What I've Built</div>
+  index.html:1465:
+  index.html:1466:            <!-- Giant scrolling text -->
+  index.html:1467:            <div style="position:absolute;inset:0;display:flex;align-items:center;">
+  index.html:1468:                <div class="proj-marquee-inner" id="proj-marquee">
+  index.html:1469:                    <span class="proj-bigname">Royal</span>
+  index.html:1470:                    <span class="proj-bigname accent">Wheels</span>
+  index.html:1471:                    <span class="proj-amp">&amp;</span>
+  index.html:1472:                    <span class="proj-bigname">AI</span>
+  index.html:1473:                    <span class="proj-bigname accent">Resume</span>
+  index.html:1474:                    <span class="proj-amp">&amp;</span>
+  index.html:1475:                    <span class="proj-bigname">Accident</span>
+  index.html:1476:                    <span class="proj-bigname accent">Predict</span>
+  index.html:1477:                    <span class="proj-amp">&amp;</span>
+  index.html:1478:                    <span class="proj-bigname">Netflix</span>
+  index.html:1479:                    <span class="proj-bigname accent">Dashboard</span>
+  index.html:1480:                </div>
+  index.html:1481:            </div>
+  index.html:1482:
+  index.html:1483:            <!-- Floating project cards (absolutely positioned, appear at scroll points) -->
+  index.html:1484:            <!-- Card 1 -->
+  index.html:1485:            <div class="proj-float" id="pf1"
+  index.html:1486:                
+style="top:50%;left:50%;opacity:0;background:linear-gradient(135deg,#1a1040,#0d0820);">
+  index.html:1487:                <div class="proj-float-inner">
+  index.html:1488:                    <div class="pf-num">Project 01</div>
+  index.html:1489:                    <div style="font-size:2rem">🚗</div>
+> index.html:1490:                    <div class="pf-title">RoyalWheels</div>
+  index.html:1491:                    <div class="pf-desc">Full-Stack Vehicle Rental Platform — scalable booking with 
+real-time
+  index.html:1492:                        availability control.</div>
+  index.html:1493:                    <div class="pf-tags"><span class="pf-tag">Django</span><span 
+class="pf-tag">Python</span><span
+  index.html:1494:                            class="pf-tag">SQLite</span><span class="pf-tag">REST APIs</span></div>
+  index.html:1495:                    <div style="display:flex; gap:16px; margin-top:20px; pointer-events:all;">
+> index.html:1496:                        <a href="https://github.com/mukundkhandelwal463/RoyalWheels" target="_blank"
+  index.html:1497:                            class="text-slate-400 hover:text-white transition-colors" 
+title="GitHub"><i
+  index.html:1498:                                class="fab fa-github text-xl"></i></a>
+  index.html:1499:                        
+> index.html:1500:                        <a href="https://github.com/mukundkhandelwal463/RoyalWheels" target="_blank"
+  index.html:1501:                            class="text-slate-400 hover:text-[#FF6B6B] transition-colors" 
+title="Live Site"><i
+  index.html:1502:                                class="fas fa-external-link-alt text-xl"></i></a>
+  index.html:1503:                    </div>
+  index.html:1504:                </div>
+  index.html:1505:            </div>
+  index.html:1506:            <!-- Card 2 -->
+  index.html:1507:            <div class="proj-float" id="pf2"
+  index.html:1508:                
+style="top:50%;left:50%;opacity:0;background:linear-gradient(135deg,#0d2040,#061228);">
+  index.html:1509:                <div class="proj-float-inner">
+  index.html:1510:                    <div class="pf-num">Project 02</div>
+  index.html:1511:                    <div style="font-size:2rem">🤖</div>
+> index.html:1512:                    <div class="pf-title">AI Resume Analyzer</div>
+  index.html:1513:                    <div class="pf-desc">End-to-end AI resume parsing, ATS scoring &amp; job 
+recommendation via NLP
+  index.html:1514:                        pipeline.</div>
+  index.html:1515:                    <div class="pf-tags"><span class="pf-tag">Flask</span><span 
+class="pf-tag">spaCy</span><span
+  index.html:1516:                            class="pf-tag">Scikit-learn</span><span 
+class="pf-tag">MongoDB</span></div>
+  index.html:1517:                    <div style="display:flex; gap:16px; margin-top:20px; pointer-events:all;">
+  index.html:1518:                        <a href="https://github.com/mukundkhandelwal463/AI-powered-Resume-Screener" 
+target="_blank"
+  index.html:1519:                            class="text-slate-400 hover:text-white transition-colors" 
+title="GitHub"><i
+  index.html:1520:                                class="fab fa-github text-xl"></i></a>
+  index.html:1521:                        
+  index.html:1522:                        
+  index.html:1523:                    </div>
+  index.html:1524:                </div>
+  index.html:1525:            </div>
+  index.html:1526:            <!-- Card 3 -->
+  index.html:1527:            <div class="proj-float" id="pf3"
+  index.html:1528:                
+style="top:50%;left:50%;opacity:0;background:linear-gradient(135deg,#0a2a1a,#061510);">
+  index.html:1529:                <div class="proj-float-inner">
+  index.html:1530:                    <div class="pf-num">Project 03</div>
+  index.html:1531:                    <div style="font-size:2rem">🚨</div>
+  index.html:1532:                    <div class="pf-title">Accident Severity Prediction</div>
+  index.html:1533:                    <div class="pf-desc">ML model predicting road accident severity — Random Forest 
++ Streamlit Cloud
+  index.html:1534:                        deployment.</div>
+  index.html:1535:                    <div class="pf-tags"><span class="pf-tag">Random Forest</span><span
+  index.html:1536:                            class="pf-tag">Pandas</span><span class="pf-tag">Streamlit</span></div>
+  index.html:1537:                    <div style="display:flex; gap:16px; margin-top:20px; pointer-events:all;">
+  index.html:1538:                        <a 
+href="https://github.com/mukundkhandelwal463/mukundkhandelwal463-Accident-Prediction-With-Pipeline/tree/main"
+  index.html:1539:                            target="_blank" class="text-slate-400 hover:text-white 
+transition-colors" title="GitHub"><i
+  index.html:1540:                                class="fab fa-github text-xl"></i></a>
+> index.html:1541:                        <a href="https://github.com/mukundkhandelwal463/RoyalWheels" target="_blank"
+  index.html:1542:                            class="text-slate-400 hover:text-[#FF6B6B] transition-colors" 
+title="Live Site"><i
+  index.html:1543:                                class="fas fa-external-link-alt text-xl"></i></a>
+  index.html:1544:                        
+  index.html:1545:                    </div>
+  index.html:1546:                </div>
+  index.html:1547:            </div>
+  index.html:1548:            <!-- Card 4 -->
+  index.html:1549:            <div class="proj-float" id="pf4"
+  index.html:1550:                
+style="top:50%;left:50%;opacity:0;background:linear-gradient(135deg,#2a0d0d,#1a0508);">
+  index.html:1551:                <div class="proj-float-inner">
+  index.html:1552:                    <div class="pf-num">Project 04</div>
+  index.html:1553:                    <div style="font-size:2rem">📊</div>
+> index.html:1554:                    <div class="pf-title">Netflix Data Dashboard</div>
+  index.html:1555:                    <div class="pf-desc">Interactive Power BI dashboard — yearly trends, genre 
+distributions &amp;
+  index.html:1556:                        content KPIs.</div>
+  index.html:1557:                    <div class="pf-tags"><span class="pf-tag">Power BI</span><span 
+class="pf-tag">Excel</span><span
+  index.html:1558:                            class="pf-tag">Pivot Tables</span></div>
+  index.html:1559:                    <div style="display:flex; gap:16px; margin-top:20px; pointer-events:all;">
+  index.html:1560:                        <a 
+href="https://github.com/mukundkhandelwal463/Netflix-Movies-Analysis-Dashboard"
+  index.html:1561:                            target="_blank" class="text-slate-400 hover:text-white 
+transition-colors" title="GitHub"><i
+  index.html:1562:                                class="fab fa-github text-xl"></i></a>
+  index.html:1563:                        <a href="https://linkedin.com/in/mukundkhandelwal-6a8663283" target="_blank"
+  index.html:1564:                            class="text-slate-400 hover:text-[#00E5FF] transition-colors" 
+title="LinkedIn"><i
+  index.html:1565:                                class="fab fa-linkedin text-xl"></i></a>
+  index.html:1566:                        
+  index.html:1567:                    </div>
+  index.html:1568:                </div>
+  index.html:1569:            </div>
+  index.html:1570:
+  index.html:1571:            <!-- Progress dots -->
+  index.html:1572:            <div id="proj-dots"
+  index.html:1573:                
+style="position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;gap:10px;">
+  index.html:1574:                <div class="pdot active"
+  index.html:1575:                    style="width:24px;height:4px;border-radius:2px;background:#8B5CF6;transition:all 
+.3s"></div>
+  index.html:1576:                <div class="pdot"
+  index.html:1577:                    
+style="width:8px;height:4px;border-radius:2px;background:rgba(139,92,246,.25);transition:all .3s">
+  index.html:1578:                </div>
+  index.html:1579:                <div class="pdot"
+  index.html:1580:                    
+style="width:8px;height:4px;border-radius:2px;background:rgba(139,92,246,.25);transition:all .3s">
+  index.html:1581:                </div>
+  index.html:1582:                <div class="pdot"
+  index.html:1583:                    
+style="width:8px;height:4px;border-radius:2px;background:rgba(139,92,246,.25);transition:all .3s">
+  index.html:1584:                </div>
+  index.html:1605:                        <div
+  index.html:1606:                            class="w-full min-h-[calc(100vh-80px)] bg-gradient-to-br from-[#11092b] 
+via-[#050505] to-[#050505] border-t border-slate-800 shadow-[0_-20px_40px_rgba(0,0,0,0.5)] r2l-stack flex items-center 
+relative overflow-hidden">
+  index.html:1607:                            <!-- Subtle mesh glow -->
+  index.html:1608:                            <div
+  index.html:1609:                                class="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 
+rounded-full blur-[120px] pointer-events-none">
+  index.html:1610:                            </div>
+  index.html:1611:
+  index.html:1612:                            <div
+  index.html:1613:                                class="max-w-6xl mx-auto px-6 py-12 md:py-16 flex flex-col 
+md:flex-row gap-6 md:gap-12 w-full relative z-10">
+  index.html:1614:                                <div class="w-full md:w-1/4">
+  index.html:1615:                                    <div
+  index.html:1616:                                        class="relative group perspective-1000 transform 
+transition-transform duration-500 hover:scale-105">
+  index.html:1617:                                        <div
+  index.html:1618:                                            class="absolute inset-0 bg-[#8B5CF6] rounded-2xl 
+blur-[20px] opacity-40 group-hover:opacity-70 transition-opacity duration-500">
+  index.html:1619:                                        </div>
+  index.html:1620:                                        <div
+  index.html:1621:                                            class="relative w-full aspect-square rounded-2xl 
+overflow-hidden border border-[#8B5CF6]/30 shadow-[0_0_40px_rgba(0,0,0,0.5)] bg-[#050505] p-2">
+  index.html:1622:                                            <div class="w-full h-full rounded-xl overflow-hidden 
+relative">
+  index.html:1623:                                                <img src="./assets/proj1_wheel.png" alt="Project 
+Illustration"
+  index.html:1624:                                                    class="w-full h-full object-cover transform 
+transition-transform duration-700 group-hover:scale-110">
+  index.html:1625:                                                <div
+  index.html:1626:                                                    class="absolute inset-0 bg-gradient-to-t 
+from-[#050505] via-transparent to-transparent opacity-60">
+  index.html:1627:                                                </div>
+  index.html:1628:                                            </div>
+  index.html:1629:                                        </div>
+  index.html:1630:                                    </div>
+  index.html:1631:                                </div>
+  index.html:1632:                                <div class="w-full md:w-3/4">
+  index.html:1633:                                    <h3 style="font-family: 'Space Grotesk', sans-serif;"
+  index.html:1634:                                        class="text-4xl md:text-5xl font-extrabold mb-6 text-white 
+tracking-tighter">
+> index.html:1635:                                        RoyalWheels</h3>
+  index.html:1636:                                    <ul
+  index.html:1637:                                        class="text-lg md:text-xl text-slate-400 leading-relaxed 
+mb-8 list-none space-y-4">
+  index.html:1638:                                        <li class="flex items-start gap-3"><span class="text-primary 
+mt-1">▹</span>
+  index.html:1639:                                            Built an enterprise-grade Full-Stack Vehicle Rental 
+Platform handling
+  index.html:1640:                                            high-volume transactions.</li>
+  index.html:1641:                                        <li class="flex items-start gap-3"><span class="text-primary 
+mt-1">▹</span>
+  index.html:1642:                                            Engineered scalable booking capabilities with granular, 
+real-time
+  index.html:1643:                                            availability control.</li>
+  index.html:1644:                                        <li class="flex items-start gap-3"><span class="text-primary 
+mt-1">▹</span>
+  index.html:1645:                                            Integrated advanced role-based authentication to 
+securely separate user and
+  index.html:1646:                                            admin flows.</li>
+  index.html:1647:                                        <li class="flex items-start gap-3"><span class="text-primary 
+mt-1">▹</span>
+  index.html:1648:                                            Developed machine-learning-inspired dynamic pricing 
+algorithms adapting to
+  index.html:1649:                                            supply & demand metrics.</li>
+  index.html:1650:                                        <li class="flex items-start gap-3"><span class="text-primary 
+mt-1">▹</span>
+  index.html:1651:                                            Designed a highly responsive user dashboard tailored for 
+seamless parallel
+  index.html:1652:                                            booking operations.</li>
+  index.html:1653:                                    </ul>
+  index.html:1654:                                    <div class="flex flex-col gap-4 text-slate-300 text-lg mb-8">
+  index.html:1655:                                        <div class="flex gap-8"><span
+  index.html:1656:                                                class="text-slate-500 
+font-mono">01</span><span>Django, Python,
+  index.html:1657:                                                SQLite</span></div>
+  index.html:1658:                                        <div class="flex gap-8"><span
+  index.html:1659:                                                class="text-slate-500 font-mono">02</span><span>REST 
+APIs, JWT
+  index.html:1660:                                                Auth</span></div>
+  index.html:1661:                                    </div>
+  index.html:1662:                                    <div class="flex gap-4">
+  index.html:1663:                                        <a href="#"
+  index.html:1664:                                            class="px-6 py-3 rounded-full bg-primary/20 text-primary 
+hover:bg-primary hover:text-white transition-colors border border-primary/50 font-semibold flex items-center gap-2"><i
+  index.html:1665:                                                class="fab fa-github"></i> GitHub</a>
+  index.html:1815:                    <div class="proj-list-card sticky top-[80px] w-full z-[4]" style="min-height: 
+calc(100vh - 80px);">
+  index.html:1816:                        <div
+  index.html:1817:                            class="w-full min-h-[calc(100vh-80px)] bg-gradient-to-tl from-[#1a0508] 
+via-[#050505] to-[#050505] border-t border-slate-800 shadow-[0_-20px_40px_rgba(0,0,0,0.5)] r2l-stack flex items-center 
+relative overflow-hidden">
+  index.html:1818:                            <div
+  index.html:1819:                                class="absolute top-0 left-0 w-[500px] h-[500px] bg-[#E50914]/10 
+rounded-full blur-[140px] pointer-events-none">
+  index.html:1820:                            </div>
+  index.html:1821:
+  index.html:1822:                            <div
+  index.html:1823:                                class="max-w-6xl mx-auto px-6 py-12 md:py-16 flex flex-col 
+md:flex-row gap-6 md:gap-12 w-full relative z-10">
+  index.html:1824:                                <div class="w-full md:w-1/4">
+  index.html:1825:                                    <div
+  index.html:1826:                                        class="relative group perspective-1000 transform 
+transition-transform duration-500 hover:scale-105">
+  index.html:1827:                                        <div
+  index.html:1828:                                            class="absolute inset-0 bg-[#E50914] rounded-2xl 
+blur-[20px] opacity-40 group-hover:opacity-70 transition-opacity duration-500">
+  index.html:1829:                                        </div>
+  index.html:1830:                                        <div
+  index.html:1831:                                            class="relative w-full aspect-square rounded-2xl 
+overflow-hidden border border-[#E50914]/30 shadow-[0_0_40px_rgba(0,0,0,0.5)] bg-[#050505] p-2">
+  index.html:1832:                                            <div class="w-full h-full rounded-xl overflow-hidden 
+relative">
+  index.html:1833:                                                <img src="./assets/proj4_netflix.png" alt="Project 
+Illustration"
+  index.html:1834:                                                    class="w-full h-full object-cover transform 
+transition-transform duration-700 group-hover:scale-110">
+  index.html:1835:                                                <div
+  index.html:1836:                                                    class="absolute inset-0 bg-gradient-to-t 
+from-[#050505] via-transparent to-transparent opacity-60">
+  index.html:1837:                                                </div>
+  index.html:1838:                                            </div>
+  index.html:1839:                                        </div>
+  index.html:1840:                                    </div>
+  index.html:1841:                                </div>
+  index.html:1842:                                <div class="w-full md:w-3/4">
+  index.html:1843:                                    <h3 style="font-family: 'Space Grotesk', sans-serif;"
+  index.html:1844:                                        class="text-4xl md:text-5xl font-extrabold mb-6 text-white 
+tracking-tighter">
+> index.html:1845:                                        Netflix Data Dashboard</h3>
+  index.html:1846:                                    <ul
+  index.html:1847:                                        class="text-lg md:text-xl text-slate-400 leading-relaxed 
+mb-8 list-none space-y-4">
+  index.html:1848:                                        <li class="flex items-start gap-3"><span 
+class="text-[#E50914] mt-1">▹</span>
+  index.html:1849:                                            Designed a visually immersive, deeply analytical 
+dashboard aggregating
+  index.html:1850:                                            global streaming datasets.</li>
+  index.html:1851:                                        <li class="flex items-start gap-3"><span 
+class="text-[#E50914] mt-1">▹</span>
+  index.html:1852:                                            Extracted insights uncovering macro trends in binge 
+habits and regional
+  index.html:1853:                                            content preferences.</li>
+  index.html:1854:                                        <li class="flex items-start gap-3"><span 
+class="text-[#E50914] mt-1">▹</span>
+  index.html:1855:                                            Highlighted pivotal shifts in genre popularity 
+fluctuations across the last
+  index.html:1856:                                            streaming decade.</li>
+  index.html:1857:                                        <li class="flex items-start gap-3"><span 
+class="text-[#E50914] mt-1">▹</span>
+  index.html:1858:                                            Modeled robust relational structures using complex DAX 
+queries and data
+  index.html:1859:                                            transformation logic.</li>
+  index.html:1860:                                        <li class="flex items-start gap-3"><span 
+class="text-[#E50914] mt-1">▹</span>
+  index.html:1861:                                            Translated millions of raw records into an intuitive 
+visual story for
+  index.html:1862:                                            non-technical stakeholders.</li>
+  index.html:1863:                                    </ul>
+  index.html:1864:                                    <div class="flex flex-col gap-4 text-slate-300 text-lg mb-8">
+  index.html:1865:                                        <div class="flex gap-8"><span
+  index.html:1866:                                                class="text-slate-500 
+font-mono">01</span><span>Power BI, DAX</span>
+  index.html:1867:                                        </div>
+  index.html:1868:                                        <div class="flex gap-8"><span
+  index.html:1869:                                                class="text-slate-500 font-mono">02</span><span>Data 
+Modeling &
+  index.html:1870:                                                Cleaning</span></div>
+  index.html:1871:                                    </div>
+  index.html:1872:                                    <div class="flex gap-4">
+  index.html:1873:                                        <a href="#"
+  index.html:1874:                                            class="px-6 py-3 rounded-full bg-primary/20 text-primary 
+hover:bg-primary hover:text-white transition-colors border border-primary/50 font-semibold flex items-center gap-2"><i
+  index.html:1875:                                                class="fab fa-github"></i> Data Source</a>
+
+

@@ -626,6 +626,22 @@
             border: 1px solid rgba(255, 255, 255, .15);
         }
 
+        .mobile-nav-toggle {
+            display: none;
+            width: 42px;
+            height: 42px;
+            border-radius: 999px;
+            border: 1px solid rgba(22, 163, 74, .22);
+            background: rgba(255, 255, 255, .78);
+            color: #0f172a;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mobile-nav-panel {
+            display: none;
+        }
+
         /* Certification Flip Cards */
         .cert-card-container {
             perspective: 1000px;
@@ -1175,6 +1191,188 @@
             color: #0f0c29;
         }
 
+        @media (max-width: 767px) {
+            nav {
+                top: 12px;
+                width: calc(100% - 20px);
+                padding: 12px 14px;
+                border-radius: 28px;
+                background: rgba(255, 255, 255, .9);
+                backdrop-filter: blur(18px);
+                border-color: rgba(22, 163, 74, .16);
+            }
+
+            nav.scrolled {
+                padding: 10px 14px;
+            }
+
+            .mobile-nav-toggle {
+                display: inline-flex;
+            }
+
+            .mobile-nav-panel {
+                display: none;
+                margin-top: 12px;
+                padding: 14px;
+                border-radius: 22px;
+                background: rgba(255, 255, 255, .96);
+                border: 1px solid rgba(22, 163, 74, .16);
+                box-shadow: 0 18px 48px rgba(15, 23, 42, .12);
+            }
+
+            .mobile-nav-panel.open {
+                display: grid;
+                gap: 10px;
+            }
+
+            .mobile-nav-panel a {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 46px;
+                border-radius: 14px;
+                text-align: center;
+            }
+
+            .mobile-nav-toggle {
+                display: inline-flex !important;
+                flex-shrink: 0;
+            }
+
+            #navbar>div {
+                gap: 10px;
+            }
+
+            #navbar .font-mono.font-bold.text-xl.grad {
+                font-size: 1.8rem;
+                flex-shrink: 0;
+            }
+
+            #navbar .flex.items-center.gap-3 {
+                gap: 8px;
+                margin-left: auto;
+                flex-shrink: 0;
+            }
+
+            #themeBtn {
+                width: 42px;
+                height: 42px;
+                flex-shrink: 0;
+            }
+
+            .marquee-wrap,
+            #projects {
+                display: none;
+            }
+
+            #hero {
+                min-height: auto;
+                padding-top: 110px;
+                padding-bottom: 32px;
+            }
+
+            #hero .max-w-6xl > .flex {
+                flex-direction: column !important;
+                gap: 28px;
+            }
+
+            #hero h1 {
+                font-size: clamp(2.7rem, 12vw, 4rem);
+            }
+
+            #hero .flex.flex-wrap.gap-4 {
+                width: 100%;
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            #hero .flex.flex-wrap.gap-4 a {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .robot-wrap {
+                transform: scale(.68);
+                transform-origin: center center;
+            }
+
+            #hero .mt-16.flex.flex-col.items-center.gap-2 {
+                display: none;
+            }
+
+            #about,
+            #skills,
+            #projects-list,
+            #education,
+            #contact {
+                padding-top: 72px;
+                padding-bottom: 72px;
+            }
+
+            #about>div.pointer-events-none,
+            #skills>div.pointer-events-none,
+            #education>div.pointer-events-none,
+            #contact>div.pointer-events-none,
+            #projects>div>div.pointer-events-none {
+                top: 18px !important;
+                font-size: clamp(3rem, 20vw, 5.4rem) !important;
+                letter-spacing: .16em !important;
+            }
+
+            #about .relative.w-72,
+            #about .relative.w-72.h-72 {
+                width: min(84vw, 320px);
+                height: min(84vw, 320px);
+            }
+
+            #skills .glass,
+            #contact .glass.p-10 {
+                padding: 1.25rem !important;
+                border-radius: 24px;
+            }
+
+            #projects-list .proj-list-card {
+                position: static !important;
+                top: auto !important;
+                min-height: auto !important;
+            }
+
+            #projects-list .proj-list-card>div {
+                min-height: auto !important;
+            }
+
+            #projects-list h3 {
+                font-size: 2.1rem !important;
+                margin-bottom: 1.25rem !important;
+            }
+
+            #projects-list ul {
+                font-size: 1rem !important;
+                line-height: 1.7 !important;
+            }
+
+            #projects-list .flex.gap-4 {
+                flex-direction: column;
+            }
+
+            #projects-list .flex.gap-4 a {
+                width: 100%;
+                justify-content: center;
+            }
+
+            footer .flex {
+                text-align: center;
+            }
+
+            #cursor-dot,
+            #cursor-ring {
+                display: none !important;
+            }
+
+            * {
+                cursor: auto !important;
+            }
+        }
         </style>
 
     <style>
@@ -1251,7 +1449,19 @@
                 <a href="mailto:mukundkhandelwal463@gmail.com"
                     class="hidden md:block px-5 py-2 rounded-full bg-primary text-gray-900 text-sm font-semibold hover:bg-green-600 transition-colors">Hire
                     Me</a>
+                <button id="mobileMenuBtn" class="mobile-nav-toggle md:hidden" aria-label="Open menu" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
+        </div>
+        <div id="mobileNavPanel" class="mobile-nav-panel md:hidden">
+            <a href="#about" class="glass text-slate-700 font-medium">About</a>
+            <a href="#skills" class="glass text-slate-700 font-medium">Skills</a>
+            <a href="#projects-list" class="glass text-slate-700 font-medium">Projects</a>
+            <a href="#education" class="glass text-slate-700 font-medium">Education</a>
+            <a href="#contact" class="glass text-slate-700 font-medium">Contact</a>
+            <a href="mukund cv.pdf" download="Mukund_Khandelwal_CV.pdf" class="glass text-secondary font-semibold">Download CV</a>
+            <a href="mailto:mukundkhandelwal463@gmail.com" class="px-5 py-3 rounded-2xl bg-primary text-gray-900 text-sm font-semibold text-center">Hire Me</a>
         </div>
     </nav>
 
@@ -2480,6 +2690,8 @@
     <script>
         // === THEME ===
         const themeBtn = document.getElementById('themeBtn');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileNavPanel = document.getElementById('mobileNavPanel');
         const rootEl = document.documentElement;
         // Always enforce dark mode for index.html
         rootEl.classList.remove('dark');
@@ -2487,6 +2699,20 @@
         themeBtn.addEventListener('click', () => {
             window.location.href = 'index.html';
         });
+        if (mobileMenuBtn && mobileNavPanel) {
+            mobileMenuBtn.addEventListener('click', () => {
+                const isOpen = mobileNavPanel.classList.toggle('open');
+                mobileMenuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                mobileMenuBtn.innerHTML = `<i class="fas fa-${isOpen ? 'xmark' : 'bars'}"></i>`;
+            });
+            mobileNavPanel.querySelectorAll('a').forEach((link) => {
+                link.addEventListener('click', () => {
+                    mobileNavPanel.classList.remove('open');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+        }
 
         // === GSAP + LENIS (zero-lag integration) ===
         gsap.registerPlugin(ScrollTrigger);
@@ -2573,7 +2799,7 @@
 
                 // Projects — giant marquee + floating cards
                 let projMarquee = document.getElementById('proj-marquee');
-                if (projMarquee) {
+                if (projMarquee && window.innerWidth >= 768) {
                     let moveAmount = projMarquee.scrollWidth - window.innerWidth + window.innerWidth * 0.2; // Move it past the screen
 
                     let ptl = gsap.timeline({
